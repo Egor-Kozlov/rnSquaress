@@ -1,7 +1,8 @@
-import {View, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {View, Text, TouchableOpacity, Animated} from 'react-native';
+import React, {useRef, useState} from 'react';
 import styles from './styles';
 import popularItems from './content';
+import Item from './Item/Item';
 
 const Popular = () => {
   return (
@@ -9,17 +10,7 @@ const Popular = () => {
       <Text style={styles.title}>Популярно на сайте</Text>
       <View style={styles.list}>
         {popularItems.map((item, index) => (
-          <TouchableOpacity
-            style={[
-              styles.item,
-              {backgroundColor: item.color},
-              index === 0 ? styles.itemBorderLeft : null,
-              index === 1 ? styles.itemBorderRight : null,
-            ]}
-            key={item.title}>
-            <Text style={styles.itemSubtitle}>{item.category}</Text>
-            <Text style={styles.itemTitle}>{item.title}</Text>
-          </TouchableOpacity>
+          <Item key={item.title} item={item} />
         ))}
       </View>
     </View>

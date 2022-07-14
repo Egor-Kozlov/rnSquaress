@@ -12,10 +12,9 @@ import LocationIcon from './icons/location-icon.svg';
 import PersonIcon from './icons/person-icon.svg';
 import SearchIcon from './icons/search-icon.svg';
 
-const Header = ({translateHeader}) => {
+const Header = () => {
   return (
-    <Animated.View
-      style={[styles.container, {transform: [{translateY: translateHeader}]}]}>
+    <View style={styles.container}>
       <View style={styles.content}>
         <TouchableOpacity>
           <LocationIcon />
@@ -29,7 +28,7 @@ const Header = ({translateHeader}) => {
         <TextInput style={styles.input} placeholder="Поиск мест и событий" />
         <SearchIcon style={styles.searchIcon} />
       </View>
-    </Animated.View>
+    </View>
   );
 };
 
@@ -40,17 +39,18 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottomEndRadius: 35,
     borderBottomStartRadius: 35,
-    borderWidth: StyleSheet.hairlineWidth,
     // backgroundColor: 'green',
     paddingBottom: 15,
-    // shadowColor: '#5F73F1',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 3,
-    // },
-    // shadowOpacity: 0.18,
-    // shadowRadius: 4.59,
-    // elevation: 5,
+    shadowColor: '#5F73F1',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 15.27,
+
+    elevation: 10,
+    backgroundColor: '#fff',
   },
   title: {
     color: '#5F73F1',

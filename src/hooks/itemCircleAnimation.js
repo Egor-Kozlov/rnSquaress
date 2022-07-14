@@ -1,0 +1,3 @@
+const itemCircleAnimation = () => {};
+
+return itemCircleAnimation;
