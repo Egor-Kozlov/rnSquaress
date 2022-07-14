@@ -30,6 +30,7 @@ const ServicesList = () => {
             icon={item.icon}
             onPressFunc={showFirstFiveServices}
             border={index === visibleService.length - 2 ? 'left' : null}
+            disableBorderTop={index === 0 || index === 1 || index === 2}
           />
         ))}
         {visibleService && visibleService.length !== entertainments.length ? (

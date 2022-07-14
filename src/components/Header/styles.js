@@ -5,7 +5,7 @@ export default StyleSheet.create({
     width: '100%',
     borderBottomEndRadius: 35,
     borderBottomStartRadius: 35,
-    // borderWidth: 1,
+    borderWidth: StyleSheet.hairlineWidth,
     // backgroundColor: 'green',
     paddingBottom: 15,
     // shadowColor: '#5F73F1',

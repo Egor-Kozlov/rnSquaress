@@ -9,6 +9,7 @@ export default StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    // backgroundColor: 'gold',
     // borderWidth: 1,
     // borderColor: '#EFEFEF',
     // borderTopWidth: 0,

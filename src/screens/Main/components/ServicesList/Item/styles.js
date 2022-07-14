@@ -27,4 +27,7 @@ export default StyleSheet.create({
     borderTopWidth: 0,
     borderBottomStartRadius: 35,
   },
+  disableBorderTop: {
+    borderTopWidth: 0,
+  },
 });
