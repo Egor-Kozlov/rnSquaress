@@ -7,17 +7,23 @@
  */
 
 import React from 'react';
-import {SafeAreaView, StyleSheet, Pressable} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Pressable,
+  StatusBar,
+  View,
+} from 'react-native';
 import hideKeyboard from './src/hooks/hideKeyboard';
 import Main from './src/screens/Main/Main';
 
 const App = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Pressable onPressIn={hideKeyboard}>
         <Main />
       </Pressable>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -25,6 +31,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingTop: StatusBar.currentHeight,
   },
 });
 

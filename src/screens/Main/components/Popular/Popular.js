@@ -3,14 +3,22 @@ import React, {useRef, useState} from 'react';
 import styles from './styles';
 import popularItems from './content';
 import Item from './Item/Item';
+import Title from '../../../../components/Title/Title';
 
 const Popular = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Популярно на сайте</Text>
+      <View style={styles.titleContainer}>
+        <Title title="Популярное на сайте" />
+      </View>
       <View style={styles.list}>
         {popularItems.map((item, index) => (
-          <Item key={item.title} item={item} />
+          <Item
+            key={item.title}
+            item={item}
+            itemBorderLeft={index === 0 ? true : null}
+            itemBorderRight={index === 1 ? true : null}
+          />
         ))}
       </View>
     </View>

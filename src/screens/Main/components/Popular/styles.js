@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   container: {
     width: '100%',
-    marginTop: 55,
+    marginTop: 45,
   },
   title: {
     marginLeft: 20,
@@ -12,6 +12,10 @@ export default StyleSheet.create({
     fontFamily: 'Montserrat-Regular',
     lineHeight: 17,
     textTransform: 'uppercase',
+  },
+  titleContainer: {
+    paddingLeft: 20,
+    marginBottom: 30,
   },
   list: {
     width: '100%',

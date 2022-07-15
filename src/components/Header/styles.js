@@ -3,19 +3,20 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   container: {
     width: '100%',
+    paddingTop: 25,
     borderBottomEndRadius: 35,
     borderBottomStartRadius: 35,
-    borderWidth: StyleSheet.hairlineWidth,
     // backgroundColor: 'green',
     paddingBottom: 15,
-    // shadowColor: '#5F73F1',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 3,
-    // },
-    // shadowOpacity: 0.18,
-    // shadowRadius: 4.59,
-    // elevation: 5,
+    shadowColor: '#5F73F1',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 15.27,
+    elevation: 10,
+    backgroundColor: '#fff',
   },
   title: {
     color: '#5F73F1',
