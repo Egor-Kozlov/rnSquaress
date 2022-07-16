@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   item: {
-    width: 195,
+    width: '50%',
     height: 195,
     paddingTop: 22,
     alignItems: 'center',

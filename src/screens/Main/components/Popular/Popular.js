@@ -1,5 +1,5 @@
-import {View, Text, TouchableOpacity, Animated} from 'react-native';
-import React, {useRef, useState} from 'react';
+import {View} from 'react-native';
+import React from 'react';
 import styles from './styles';
 import popularItems from './content';
 import Item from './Item/Item';

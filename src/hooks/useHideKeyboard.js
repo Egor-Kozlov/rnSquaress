@@ -1,7 +1,7 @@
 import {Keyboard} from 'react-native';
 
-const hideKeyboard = () => {
+const useHideKeyboard = () => {
   Keyboard.dismiss();
 };
 
-export default hideKeyboard;
+export default useHideKeyboard;

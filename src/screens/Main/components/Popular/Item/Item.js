@@ -1,61 +1,20 @@
-import React, {useState, useRef} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, Animated} from 'react-native';
+import React from 'react';
+import {View, TouchableOpacity, Animated} from 'react-native';
 import styles from './styles';
+import useAnimatedItem from './useAnimatedItem';
 
 const Item = ({item, itemBorderLeft, itemBorderRight}) => {
-  const [itemCircle, setItemCircle] = useState(false);
-
-  //animated border radius for popular items on press
-  const animatedBorderRadius = useRef(new Animated.Value(0)).current;
-
-  const animatedBorderRadiusOnPress = () => {
-    setItemCircle(!itemCircle);
-    Animated.timing(animatedBorderRadius, {
-      toValue: itemCircle ? 0 : 100,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const animatedBorderRadiusStyle = {
-    borderRadius: animatedBorderRadius.interpolate({
-      inputRange: [0, 100],
-      outputRange: [0, 100],
-      extrapolate: 'clamp',
-    }),
-  };
-
-  const animatedLeftBorderRadiusStyle = {
-    borderTopLeftRadius: animatedBorderRadius.interpolate({
-      inputRange: [0, 100],
-      outputRange: [37, 100],
-      extrapolate: 'clamp',
-    }),
-  };
-
-  const animatedRightBorderRadiusStyle = {
-    borderTopRightRadius: animatedBorderRadius.interpolate({
-      inputRange: [0, 100],
-      outputRange: [37, 100],
-      extrapolate: 'clamp',
-    }),
-  };
-
-  const animatedScale = {
-    transform: [
-      {
-        scale: animatedBorderRadius.interpolate({
-          inputRange: [0, 100],
-          outputRange: [1, 0.7],
-          extrapolate: 'clamp',
-        }),
-      },
-    ],
-  };
+  const {
+    animatedOnPress,
+    animatedBorderRadiusStyle,
+    animatedLeftBorderRadiusStyle,
+    animatedRightBorderRadiusStyle,
+    animatedScale,
+  } = useAnimatedItem(itemBorderLeft, itemBorderRight);
 
   return (
     <TouchableOpacity
-      onPress={animatedBorderRadiusOnPress}
+      onPress={animatedOnPress}
       style={[
         styles.item,
         {backgroundColor: item.color},

@@ -14,13 +14,13 @@ import {
   StatusBar,
   View,
 } from 'react-native';
-import hideKeyboard from './src/hooks/hideKeyboard';
+import useHideKeyboard from './src/hooks/useHideKeyboard';
 import Main from './src/screens/Main/Main';
 
 const App = () => {
   return (
     <View style={styles.container}>
-      <Pressable onPressIn={hideKeyboard}>
+      <Pressable onPressIn={useHideKeyboard}>
         <Main />
       </Pressable>
     </View>
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: StatusBar.currentHeight,
+    // paddingTop: StatusBar.currentHeight,
   },
 });
 
