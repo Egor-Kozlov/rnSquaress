@@ -10,6 +10,14 @@ export default StyleSheet.create({
   titleContainer: {
     marginBottom: 30,
   },
+  list: {
+    width: '100%',
+    marginBottom: 10,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    // backgroundColor: 'gray',
+  },
   readMoreBtn: {
     justifyContent: 'center',
     alignItems: 'center',

@@ -13,14 +13,12 @@ export default StyleSheet.create({
     color: 'rgba(255, 255, 255, 0.5)',
     fontFamily: 'Montserrat-Regular',
     lineHeight: 15,
-    // fontSize: 11,
     fontSize: 15,
   },
   itemTitle: {
     color: '#FFFFFF',
     fontFamily: 'Montserrat-SemiBold',
     lineHeight: 17,
-    // fontSize: 12,
     fontSize: 16,
   },
   itemBorderLeft: {
