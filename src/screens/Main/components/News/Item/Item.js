@@ -16,7 +16,7 @@ const Item = ({title, date, author, image}) => {
   const animationStyle = useAnimatedStyle(() => {
     return {
       height: withTiming(animation.value.height, {
-        duration: 600,
+        duration: 400,
       }),
     };
   });
@@ -37,7 +37,7 @@ const Item = ({title, date, author, image}) => {
           </Text>
           <Animated.View style={[styles.descriptionContainer, animationStyle]}>
             <Text
-              numberOfLines={isOpen ? 8 : setTimeout(() => 3, 500)}
+              numberOfLines={isOpen ? 8 : setTimeout(() => 3, 400)}
               style={styles.description}>
               {title}
             </Text>
@@ -52,4 +52,4 @@ const Item = ({title, date, author, image}) => {
   );
 };
 
-export default Item;
+export default React.memo(Item);

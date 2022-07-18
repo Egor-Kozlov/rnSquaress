@@ -1,17 +1,9 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import {Text, View, TouchableOpacity, ActivityIndicator} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './styles';
 import Title from '../../../../components/Title/Title';
 import Item from './Item/Item';
 import convertDate from '../../../../modules/convertDate';
-// import useRequest from '../../../../hooks/useRequest';
 
 const keyApi = '6e58d54dec8049669945889329fb8d82';
 
@@ -26,8 +18,6 @@ const News = () => {
       `https://newsapi.org/v2/top-headlines?sources=techcrunch&pageSize=2&page=${currentPage}&apiKey=${keyApi}`,
     );
     const json = await response.json();
-    // console.log(json);
-    // setData(json);
     setData([...data, ...json.articles]);
     setCurrentPage(currentPage + 1);
     setIsLoading(false);

@@ -23,7 +23,7 @@ const useAnimatedItem = () => {
   const animatedBorderRadiusStyle = {
     borderRadius: animatedValue.interpolate({
       inputRange,
-      outputRange: [0, 100],
+      outputRange: [100, 0],
       extrapolate: 'clamp',
     }),
   };
@@ -31,7 +31,7 @@ const useAnimatedItem = () => {
   const animatedLeftBorderRadiusStyle = {
     borderTopLeftRadius: animatedValue.interpolate({
       inputRange,
-      outputRange: [37, 100],
+      outputRange: [100, 37],
       extrapolate: 'clamp',
     }),
   };
@@ -39,7 +39,7 @@ const useAnimatedItem = () => {
   const animatedRightBorderRadiusStyle = {
     borderTopRightRadius: animatedValue.interpolate({
       inputRange,
-      outputRange: [37, 100],
+      outputRange: [100, 37],
       extrapolate: 'clamp',
     }),
   };
@@ -49,7 +49,7 @@ const useAnimatedItem = () => {
       {
         scale: animatedValue.interpolate({
           inputRange,
-          outputRange: [1, 0.7],
+          outputRange: [0.7, 1],
           extrapolate: 'clamp',
         }),
       },
