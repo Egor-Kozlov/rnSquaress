@@ -17,7 +17,7 @@ const Header = ({animatedProps}) => {
   const animatedScrollStyle = useAnimatedStyle(() => {
     const transform = interpolate(
       animatedProps.initial.value.value,
-      [-300, 0, 140, 10000],
+      [-300, 0, 140, Infinity],
       [170, 170, 100, 110],
       'clamp',
     );
@@ -29,7 +29,7 @@ const Header = ({animatedProps}) => {
   const animatedFade = useAnimatedStyle(() => {
     const fade = interpolate(
       animatedProps.initial.value.value,
-      [-300, 0, 100, 10000],
+      [-300, 0, 100, Infinity],
       [1, 1, 0, 0],
       'clamp',
     );
