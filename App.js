@@ -20,7 +20,7 @@ import Main from './src/screens/Main/Main';
 const App = () => {
   return (
     <View style={styles.container}>
-      <Pressable onPressIn={useHideKeyboard}>
+      <Pressable style={styles.container} onPressIn={useHideKeyboard}>
         <Main />
       </Pressable>
     </View>
