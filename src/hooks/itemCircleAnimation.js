@@ -1,3 +1,0 @@
-const itemCircleAnimation = () => {};
-
-return itemCircleAnimation;

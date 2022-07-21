@@ -7,22 +7,13 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Pressable,
-  StatusBar,
-  View,
-} from 'react-native';
-import useHideKeyboard from './src/hooks/useHideKeyboard';
+import {StyleSheet, View} from 'react-native';
 import Main from './src/screens/Main/Main';
 
 const App = () => {
   return (
     <View style={styles.container}>
-      <Pressable style={styles.container} onPressIn={useHideKeyboard}>
-        <Main />
-      </Pressable>
+      <Main />
     </View>
   );
 };

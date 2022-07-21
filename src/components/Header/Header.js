@@ -1,4 +1,4 @@
-import {Text, View, TouchableOpacity, TextInput} from 'react-native';
+import {Text, View, TouchableOpacity, TextInput, Keyboard} from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedProps,
@@ -50,7 +50,11 @@ const Header = ({animatedProps}) => {
         </TouchableOpacity>
       </View>
       <Animated.View style={[styles.inputContainer, animatedFade]}>
-        <TextInput style={styles.input} placeholder="Поиск мест и событий" />
+        <TextInput
+          style={styles.input}
+          placeholder="Поиск мест и событий"
+          onBlur={() => Keyboard.dismiss()}
+        />
         <SearchIcon style={styles.searchIcon} />
       </Animated.View>
     </Animated.View>
