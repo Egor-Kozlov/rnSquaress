@@ -24,8 +24,8 @@ export default StyleSheet.create({
   image: {
     width: '100%',
     height: 140,
-    borderTopEndRadius: 28,
-    borderTopStartRadius: 28,
+    borderTopRightRadius: 28,
+    borderTopLeftRadius: 28,
     position: 'absolute',
     top: 0,
   },

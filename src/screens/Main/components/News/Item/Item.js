@@ -1,17 +1,20 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import {View, Text, Image, TouchableOpacity, Platform} from 'react-native';
+import React, {useState, useEffect} from 'react';
 import styles from './styles';
 import EyeIcon from './icons/eye-icon.svg';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
+  useDerivedValue,
 } from 'react-native-reanimated';
 
 const Item = ({title, date, author, image}) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [countOfLine, setCountOfLine] = useState(3);
 
   const animation = useSharedValue({height: 60});
+  const animationBlur = useSharedValue(5);
 
   const animationStyle = useAnimatedStyle(() => {
     return {
@@ -21,24 +24,45 @@ const Item = ({title, date, author, image}) => {
     };
   });
 
+  const timing = () => {
+    setTimeout(() => {
+      setCountOfLine(3);
+    }, 400);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      setCountOfLine(8);
+    } else {
+      timing();
+    }
+
+    return () => {
+      clearTimeout(timing);
+    };
+  }, [isOpen]);
+
   return (
     <TouchableOpacity
-      activeOpacity={0.6}
-      style={[styles.container]}
+      activeOpacity={Platform.OS === 'ios' ? 0.6 : 1}
+      style={styles.container}
       onPress={() => {
         animation.value = {height: isOpen ? 60 : 150};
+        animationBlur.value = isOpen ? 5 : 0;
         setIsOpen(!isOpen);
       }}>
       <View style={styles.item}>
-        <Image style={styles.image} source={{uri: image}} />
-        <View style={[styles.content]}>
+        <Image
+          blurRadius={isOpen ? 5 : 0}
+          style={styles.image}
+          source={{uri: image}}
+        />
+        <View style={styles.content}>
           <Text numberOfLines={1} style={styles.title}>
             {author}
           </Text>
           <Animated.View style={[styles.descriptionContainer, animationStyle]}>
-            <Text
-              numberOfLines={isOpen ? 8 : setTimeout(() => 3, 400)}
-              style={styles.description}>
+            <Text numberOfLines={countOfLine} style={styles.description}>
               {title}
             </Text>
           </Animated.View>
