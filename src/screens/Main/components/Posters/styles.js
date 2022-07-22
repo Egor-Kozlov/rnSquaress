@@ -1,13 +1,11 @@
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
-  container: {},
   title: {
     paddingHorizontal: 20,
   },
   listingContainer: {
-    backgroundColor: '#8dc7f0',
-    // paddingHorizontal: 20,
+    backgroundColor: '#72C4FE',
   },
   whiteBoxesList: {
     flexDirection: 'row',
@@ -21,11 +19,18 @@ export default StyleSheet.create({
     marginTop: 30,
     marginBottom: 20,
     paddingHorizontal: 17,
-    // backgroundColor: 'green',
   },
   booksList: {
-    // backgroundColor: 'green',
     width: '100%',
     paddingBottom: 50,
+  },
+  noResults: {
+    paddingTop: 40,
+    textAlign: 'center',
+    width: '100%',
+    height: 260,
+    fontSize: 18,
+    color: '#FFFFFF',
+    fontFamily: 'Montserrat-Regular',
   },
 });

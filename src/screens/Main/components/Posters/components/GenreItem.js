@@ -1,15 +1,22 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 
-const GenreItem = ({name}) => {
+const GenreItem = ({name, handleGenrePress, isChecked}) => {
   return (
-    <TouchableOpacity activeOpacity={0.5} style={styles.item}>
-      <Text style={styles.text}>{'Fiction \u0026 Literature'}</Text>
+    <TouchableOpacity
+      onPress={() => {
+        handleGenrePress(name);
+      }}
+      activeOpacity={0.5}
+      style={[styles.item, isChecked ? {backgroundColor: '#5F73F1'} : null]}>
+      <Text style={[styles.text, isChecked ? {color: '#fafafa'} : null]}>
+        {name}
+      </Text>
     </TouchableOpacity>
   );
 };
 
-export default GenreItem;
+export default React.memo(GenreItem);
 
 const styles = StyleSheet.create({
   item: {

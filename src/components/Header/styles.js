@@ -3,7 +3,6 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   container: {
     width: '100%',
-    // height: 130,
     paddingTop: 25,
     paddingBottom: 20,
     flexDirection: 'column',
@@ -36,12 +35,10 @@ export default StyleSheet.create({
   inputContainer: {
     width: '100%',
     paddingHorizontal: 20,
-    // opacity: 0,
   },
   input: {
     backgroundColor: '#F6F6F6',
     height: 40,
-    // margin: 12,
     paddingLeft: 50,
     paddingRight: 20,
     borderRadius: 20,

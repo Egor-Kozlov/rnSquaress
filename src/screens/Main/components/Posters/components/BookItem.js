@@ -27,13 +27,12 @@ const BookItem = ({picture, genre, name, author}) => {
   );
 };
 
-export default BookItem;
+export default React.memo(BookItem);
 
 const styles = StyleSheet.create({
   item: {
     width: 110,
     height: 220,
-    // backgroundColor: '#fff',
     marginLeft: 20,
     flexDirection: 'column',
     justifyContent: 'space-between',

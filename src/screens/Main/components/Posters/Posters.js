@@ -1,5 +1,5 @@
 import {View, Text, FlatList} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import styles from './styles';
 import Title from '../../../../components/Title/Title';
 import WhiteBox from './components/WhiteBox';
@@ -8,8 +8,9 @@ import GenreItem from './components/GenreItem';
 
 const Posters = () => {
   const [data, setData] = useState();
-  const [visibleBooks, setVisibleBooks] = useState();
+  const [visibleBooks, setVisibleBooks] = useState([]);
   const [isLoading, setIsLoading] = useState();
+  const [genres, setGenres] = useState([]);
   const [pickedGenres, setPickedGenres] = useState([]);
 
   const request = async () => {
@@ -20,90 +21,8 @@ const Posters = () => {
     const json = await response.json();
     console.log(json);
     setData(json);
+    setVisibleBooks(json.feed.results);
     setIsLoading(false);
-  };
-
-  const DATA = {
-    feed: {
-      title: 'Top Paid',
-      id: 'https://rss.applemarketingtools.com/api/v2/us/books/top-paid/2/books.json',
-      author: {name: 'Apple', url: 'https://www.apple.com/'},
-      links: [
-        {
-          self: 'https://rss.applemarketingtools.com/api/v2/us/books/top-paid/2/books.json',
-        },
-      ],
-      copyright: 'Copyright © 2022 Apple Inc. All rights reserved.',
-      country: 'us',
-      icon: 'https://www.apple.com/favicon.ico',
-      updated: 'Thu, 21 Jul 2022 11:41:37 +0000',
-      results: [
-        {
-          artistName: 'Daniel Silva',
-          id: '1590846416',
-          name: 'Portrait of an Unknown Woman',
-          releaseDate: '2022-07-19',
-          kind: 'books',
-          artistId: '2024433',
-          artistUrl: 'https://books.apple.com/us/author/daniel-silva/id2024433',
-          artworkUrl100:
-            'https://is3-ssl.mzstatic.com/image/thumb/Publication116/v4/47/63/fb/4763fb2c-1750-4ea8-d0b7-bba2069cc5b4/9780062834928.jpg/100x151bb.png',
-          genres: [
-            {
-              genreId: '9032',
-              name: 'Mysteries \u0026 Thrillers',
-              url: 'https://itunes.apple.com/us/genre/id9032',
-            },
-            {
-              genreId: '38',
-              name: 'Books',
-              url: 'https://itunes.apple.com/us/genre/id38',
-            },
-            {
-              genreId: '9031',
-              name: 'Fiction \u0026 Literature',
-              url: 'https://itunes.apple.com/us/genre/id9031',
-            },
-            {
-              genreId: '10039',
-              name: 'Action \u0026 Adventure',
-              url: 'https://itunes.apple.com/us/genre/id10039',
-            },
-          ],
-          url: 'https://books.apple.com/us/book/portrait-of-an-unknown-woman/id1590846416',
-        },
-        {
-          artistName: 'Delia Owens',
-          id: '1326615497',
-          name: 'Where the Crawdads Sing',
-          releaseDate: '2018-08-14',
-          kind: 'books',
-          artistId: '427536076',
-          artistUrl:
-            'https://books.apple.com/us/author/delia-owens/id427536076',
-          artworkUrl100:
-            'https://is5-ssl.mzstatic.com/image/thumb/Publication122/v4/cc/ac/7f/ccac7fee-c351-0c7b-a3da-7398fea68628/9780735219113.d.jpg/100x150bb.png',
-          genres: [
-            {
-              genreId: '10049',
-              name: 'Literary',
-              url: 'https://itunes.apple.com/us/genre/id10049',
-            },
-            {
-              genreId: '38',
-              name: 'Books',
-              url: 'https://itunes.apple.com/us/genre/id38',
-            },
-            {
-              genreId: '9031',
-              name: 'Fiction \u0026 Literature',
-              url: 'https://itunes.apple.com/us/genre/id9031',
-            },
-          ],
-          url: 'https://books.apple.com/us/book/where-the-crawdads-sing/id1326615497',
-        },
-      ],
-    },
   };
 
   const renderBooks = ({item}) => {
@@ -117,13 +36,70 @@ const Posters = () => {
     );
   };
 
+  const isGenrePicked = useCallback(
+    genre => {
+      return pickedGenres.includes(genre);
+    },
+    [pickedGenres],
+  );
+
+  const handleGenrePress = useCallback(
+    genre => {
+      if (isGenrePicked(genre)) {
+        setPickedGenres(pickedGenres.filter(g => g !== genre));
+      } else {
+        setPickedGenres([...pickedGenres, genre]);
+      }
+    },
+    [pickedGenres, isGenrePicked],
+  );
+
   const renderGenres = ({item}) => {
-    return <GenreItem name={item.name} />;
+    return (
+      <GenreItem
+        name={item}
+        isChecked={isGenrePicked(item)}
+        handleGenrePress={handleGenrePress}
+      />
+    );
   };
 
   useEffect(() => {
     request();
   }, []);
+
+  useEffect(() => {
+    if (data) {
+      const findUniqueGenres = () => {
+        const uniqueGenres = [];
+        data.feed.results.forEach(book => {
+          book.genres.forEach(genre => {
+            if (!uniqueGenres.includes(genre.name)) {
+              uniqueGenres.push(genre.name);
+            }
+          });
+        });
+        return uniqueGenres;
+      };
+      setVisibleBooks(data.feed.results);
+      setGenres(findUniqueGenres());
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (data) {
+      if (pickedGenres.length > 0) {
+        const filteredBooks = data.feed.results.filter(book => {
+          const booksGenres = book.genres.map(genre => genre.name);
+          return pickedGenres.every(genre => booksGenres.includes(genre));
+        });
+
+        setVisibleBooks(filteredBooks);
+      } else {
+        setVisibleBooks(data.feed.results);
+      }
+    }
+  }, [pickedGenres, data]);
 
   return (
     <View style={styles.container}>
@@ -131,14 +107,14 @@ const Posters = () => {
         <View style={styles.title}>
           <Title title="Афиша" arrowIcon />
         </View>
-        {data && (
+        {genres && (
           <FlatList
             style={styles.genresList}
             showsHorizontalScrollIndicator={false}
             horizontal
             renderItem={renderGenres}
-            keyExtractor={item => item.name}
-            data={data.feed.results}
+            keyExtractor={item => item}
+            data={genres}
           />
         )}
       </View>
@@ -150,16 +126,18 @@ const Posters = () => {
               <WhiteBox key={index} />
             ))}
         </View>
-        {data && (
+        {visibleBooks.length > 0 ? (
           <FlatList
             showsHorizontalScrollIndicator={false}
             horizontal
             style={styles.booksList}
-            data={data.feed.results}
+            data={visibleBooks}
             renderItem={renderBooks}
             keyExtractor={item => item.id}
             onEndReached={request}
           />
+        ) : (
+          <Text style={styles.noResults}>Нет результатов</Text>
         )}
       </View>
     </View>
