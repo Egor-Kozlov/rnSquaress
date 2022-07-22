@@ -29,6 +29,11 @@ export default StyleSheet.create({
     position: 'absolute',
     top: 0,
   },
+  indicator: {
+    position: 'absolute',
+    top: '25%',
+    left: '45%',
+  },
   content: {
     width: '100%',
     padding: 10,

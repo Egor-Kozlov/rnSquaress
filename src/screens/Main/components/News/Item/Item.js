@@ -1,4 +1,11 @@
-import {View, Text, Image, TouchableOpacity, Platform} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Platform,
+  ActivityIndicator,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import styles from './styles';
 import EyeIcon from './icons/eye-icon.svg';
@@ -11,6 +18,7 @@ import Animated, {
 
 const Item = ({title, date, author, image}) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isImageLoading, setIsImageLoading] = useState(true);
   const [countOfLine, setCountOfLine] = useState(3);
 
   const animation = useSharedValue({height: 60});
@@ -54,8 +62,17 @@ const Item = ({title, date, author, image}) => {
       <View style={styles.item}>
         <Image
           blurRadius={isOpen ? 5 : 0}
-          style={styles.image}
+          style={[styles.image, isOpen ? {opacity: 0.5, color: 'black'} : null]}
           source={{uri: image}}
+          onLoadEnd={() => {
+            setIsImageLoading(false);
+          }}
+        />
+        <ActivityIndicator
+          style={styles.indicator}
+          size="small"
+          color="#706f6f"
+          animating={isImageLoading}
         />
         <View style={styles.content}>
           <Text numberOfLines={1} style={styles.title}>

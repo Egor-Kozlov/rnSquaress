@@ -24,13 +24,9 @@ export default StyleSheet.create({
     width: '100%',
     paddingBottom: 50,
   },
-  noResults: {
+  activityIndicator: {
     paddingTop: 40,
-    textAlign: 'center',
     width: '100%',
     height: 260,
-    fontSize: 18,
-    color: '#FFFFFF',
-    fontFamily: 'Montserrat-Regular',
   },
 });

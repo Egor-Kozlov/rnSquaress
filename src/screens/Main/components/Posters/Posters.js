@@ -1,4 +1,4 @@
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import React, {useState, useEffect, useCallback} from 'react';
 import styles from './styles';
 import Title from '../../../../components/Title/Title';
@@ -137,7 +137,11 @@ const Posters = () => {
             onEndReached={request}
           />
         ) : (
-          <Text style={styles.noResults}>Нет результатов</Text>
+          <ActivityIndicator
+            style={styles.activityIndicator}
+            size="large"
+            color="#5F73F1"
+          />
         )}
       </View>
     </View>
