@@ -29,6 +29,17 @@ export default StyleSheet.create({
     position: 'absolute',
     top: 0,
   },
+  imageStyle: {
+    borderTopRightRadius: 28,
+    borderTopLeftRadius: 28,
+  },
+  imageShadow: {
+    width: '100%',
+    height: 140,
+    borderTopRightRadius: 28,
+    borderTopLeftRadius: 28,
+    backgroundColor: '#000000c0',
+  },
   indicator: {
     position: 'absolute',
     top: '25%',

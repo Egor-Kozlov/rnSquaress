@@ -29,4 +29,11 @@ export default StyleSheet.create({
     width: '100%',
     height: 260,
   },
+  noResultsText: {
+    fontSize: 18,
+    fontFamily: 'Montserrat-Regular',
+    color: '#D9DADA',
+    textAlign: 'center',
+    height: 260,
+  },
 });

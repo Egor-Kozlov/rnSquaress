@@ -111,6 +111,7 @@ const Posters = () => {
           <FlatList
             style={styles.genresList}
             showsHorizontalScrollIndicator={false}
+            extraData={[pickedGenres]}
             horizontal
             renderItem={renderGenres}
             keyExtractor={item => item}
@@ -129,6 +130,7 @@ const Posters = () => {
         {visibleBooks.length > 0 ? (
           <FlatList
             showsHorizontalScrollIndicator={false}
+            extraData={[pickedGenres]}
             horizontal
             style={styles.booksList}
             data={visibleBooks}
@@ -137,6 +139,11 @@ const Posters = () => {
             onEndReached={request}
           />
         ) : (
+          !isLoading && (
+            <Text style={styles.noResultsText}>Нет подходящих книг</Text>
+          )
+        )}
+        {isLoading && (
           <ActivityIndicator
             style={styles.activityIndicator}
             size="large"

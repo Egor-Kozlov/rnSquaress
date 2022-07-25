@@ -1,8 +1,8 @@
 import React from 'react';
 
 export default async function useRequest() {
-  const [data, setData] = React.useState(null);
-  const [error, setError] = React.useState(null);
+  const [data, setData] = React.useState();
+  const [error, setError] = React.useState();
   const [loading, setLoading] = React.useState(false);
 
   const request = async (url, options = {}) => {

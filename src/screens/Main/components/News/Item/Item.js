@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Platform,
   ActivityIndicator,
+  ImageBackground,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import styles from './styles';
@@ -21,12 +22,20 @@ const Item = ({title, date, author, image}) => {
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [countOfLine, setCountOfLine] = useState(3);
 
-  const animation = useSharedValue({height: 60});
+  const animation = useSharedValue({height: 60, opacity: 0});
   const animationBlur = useSharedValue(5);
 
   const animationStyle = useAnimatedStyle(() => {
     return {
       height: withTiming(animation.value.height, {
+        duration: 400,
+      }),
+    };
+  });
+
+  const animationStyleOpacity = useAnimatedStyle(() => {
+    return {
+      opacity: withTiming(animation.value.opacity, {
         duration: 400,
       }),
     };
@@ -55,19 +64,21 @@ const Item = ({title, date, author, image}) => {
       activeOpacity={Platform.OS === 'ios' ? 0.6 : 1}
       style={styles.container}
       onPress={() => {
-        animation.value = {height: isOpen ? 60 : 150};
+        animation.value = {height: isOpen ? 60 : 150, opacity: isOpen ? 0 : 1};
         animationBlur.value = isOpen ? 5 : 0;
         setIsOpen(!isOpen);
       }}>
       <View style={styles.item}>
-        <Image
+        <ImageBackground
           blurRadius={isOpen ? 5 : 0}
-          style={[styles.image, isOpen ? {opacity: 0.5, color: 'black'} : null]}
+          style={styles.image}
           source={{uri: image}}
+          imageStyle={styles.imageStyle}
           onLoadEnd={() => {
             setIsImageLoading(false);
-          }}
-        />
+          }}>
+          <Animated.View style={[styles.imageShadow, animationStyleOpacity]} />
+        </ImageBackground>
         <ActivityIndicator
           style={styles.indicator}
           size="small"
