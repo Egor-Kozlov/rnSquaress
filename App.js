@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
 import {
   SafeAreaView,
@@ -15,16 +7,18 @@ import {
   Platform,
 } from 'react-native';
 import Main from './src/screens/Main/Main';
+import {Provider} from 'react-redux';
+import store from './src/store/store';
 
 const App = () => {
   return (
-    <>
+    <Provider store={store}>
       <StatusBar barStyle="dark-content" backgroundColor={'#fff'} />
       <View style={styles.container}>
         <Main />
         {Platform.OS === 'ios' && <SafeAreaView />}
       </View>
-    </>
+    </Provider>
   );
 };
 

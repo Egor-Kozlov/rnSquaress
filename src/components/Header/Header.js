@@ -40,15 +40,7 @@ const Header = ({animatedProps}) => {
     };
   });
 
-  const result = [
-    'Первый',
-    'Второй',
-    'Третий',
-    'Четвертый',
-    'Четвертый',
-    'Четвертый',
-    'Четвертый',
-  ];
+  const result = ['Первый', 'Второй', 'Третий', 'Четвертый'];
 
   return (
     <Animated.View style={[styles.hiddenContainer, animatedScrollStyle]}>
@@ -87,20 +79,9 @@ const Header = ({animatedProps}) => {
                     index === result.length - 1 && styles.lastItem,
                   ]}>
                   <Text style={styles.searchItemTitle}>{item}</Text>
+                  <Text style={styles.searchItemLocation}>{item}</Text>
                 </TouchableOpacity>
               ))}
-              {/* <TouchableOpacity style={[styles.searchItem]}>
-                <Text style={styles.searchItemTitle}>Some result...</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.searchItem]}>
-                <Text style={styles.searchItemTitle}>Some result...</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.searchItem]}>
-                <Text style={styles.searchItemTitle}>Some result...</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.searchItem]}>
-                <Text style={styles.searchItemTitle}>Some result...</Text>
-              </TouchableOpacity> */}
             </View>
           )}
           <SearchIcon style={styles.searchIcon} />

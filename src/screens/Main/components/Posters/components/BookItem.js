@@ -1,16 +1,30 @@
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import React from 'react';
-
-//author
-//title
-//genre
-//picture
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
+import React, {useState} from 'react';
 
 const BookItem = ({picture, genre, name, author}) => {
+  const [isImageLoading, setIsImageLoading] = useState(true);
+
   return (
     <TouchableOpacity style={styles.item} activeOpacity={0.8}>
       <View style={styles.pictureContainer}>
-        <Image source={{uri: picture}} style={styles.picture} />
+        <Image
+          source={{uri: picture}}
+          style={styles.picture}
+          onLoadEnd={() => setIsImageLoading(false)}
+        />
+        <ActivityIndicator
+          style={styles.indicator}
+          size="small"
+          color="#5F73F1"
+          animating={isImageLoading}
+        />
       </View>
       <View style={styles.content}>
         <Text numberOfLines={2} style={styles.genre}>
@@ -54,6 +68,11 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderRadius: 30,
+  },
+  indicator: {
+    position: 'absolute',
+    top: '42%',
+    left: '42%',
   },
   content: {
     paddingTop: 12,

@@ -8,9 +8,6 @@ export default StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-    // marginBottom: 35,
-    // paddingTop: 25,
-    // paddingBottom: 20,
     flexDirection: 'column',
     justifyContent: 'space-between',
     borderBottomEndRadius: 35,
@@ -37,8 +34,6 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    // paddingBottom: 30,
-    // paddingTop: 10,
   },
   inputContainer: {
     width: '100%',
@@ -93,6 +88,8 @@ export default StyleSheet.create({
     width: '100%',
     paddingHorizontal: 20,
     paddingVertical: 8,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     borderBottomColor: '#EFEFEF',
     borderBottomWidth: 1,
     backgroundColor: '#fff',
@@ -101,6 +98,11 @@ export default StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Montserrat-Regular',
     color: '#545353',
+  },
+  searchItemLocation: {
+    fontSize: 12,
+    fontFamily: 'Montserrat-Regular',
+    color: '#b3bae3',
   },
   firstItem: {
     borderTopLeftRadius: 20,
