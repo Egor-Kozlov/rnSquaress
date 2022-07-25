@@ -18,7 +18,7 @@ const Header = ({animatedProps}) => {
     const transform = interpolate(
       animatedProps.initial.value.value,
       [-300, 0, 140, Infinity],
-      [170, 170, 100, 110],
+      [130, 130, 62, 62],
       'clamp',
     );
     return {
@@ -39,24 +39,27 @@ const Header = ({animatedProps}) => {
   });
 
   return (
-    <Animated.View style={[styles.container, animatedScrollStyle]}>
-      <View style={styles.content}>
-        <TouchableOpacity>
-          <LocationIcon />
-        </TouchableOpacity>
-        <Text style={styles.title}>Логотип</Text>
-        <TouchableOpacity>
-          <PersonIcon />
-        </TouchableOpacity>
+    <Animated.View style={[styles.hiddenContainer, animatedScrollStyle]}>
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <TouchableOpacity>
+            <LocationIcon />
+          </TouchableOpacity>
+          <Text style={styles.title}>Логотип</Text>
+          <TouchableOpacity>
+            <PersonIcon />
+          </TouchableOpacity>
+        </View>
+        <Animated.View style={[styles.inputContainer, animatedFade]}>
+          <TextInput
+            style={styles.input}
+            placeholder="Поиск мест и событий"
+            onBlur={() => Keyboard.dismiss()}
+          />
+          <SearchIcon style={styles.searchIcon} />
+        </Animated.View>
       </View>
-      <Animated.View style={[styles.inputContainer, animatedFade]}>
-        <TextInput
-          style={styles.input}
-          placeholder="Поиск мест и событий"
-          onBlur={() => Keyboard.dismiss()}
-        />
-        <SearchIcon style={styles.searchIcon} />
-      </Animated.View>
+      <View style={styles.hiddenSafeAreaView} />
     </Animated.View>
   );
 };

@@ -64,7 +64,10 @@ const Item = ({title, date, author, image}) => {
       activeOpacity={Platform.OS === 'ios' ? 0.6 : 1}
       style={styles.container}
       onPress={() => {
-        animation.value = {height: isOpen ? 60 : 150, opacity: isOpen ? 0 : 1};
+        animation.value = {
+          height: isOpen ? 60 : 150,
+          opacity: isOpen ? 0 : 0.8,
+        };
         animationBlur.value = isOpen ? 5 : 0;
         setIsOpen(!isOpen);
       }}>

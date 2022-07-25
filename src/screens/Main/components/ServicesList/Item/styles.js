@@ -4,7 +4,7 @@ export default StyleSheet.create({
   servicesItem: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 0.5,
+    borderWidth: 1,
     borderColor: '#EFEFEF',
     width: '33.33%',
     height: 125,

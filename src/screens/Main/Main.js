@@ -1,4 +1,4 @@
-import {View, ScrollView} from 'react-native';
+import {View, ScrollView, SafeAreaView} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import ServicesList from './components/ServicesList/ServicesList';
@@ -17,7 +17,6 @@ const Main = () => {
   const animatedProps = useAnimatedProps(() => translationY);
 
   const scrollHandler = useAnimatedScrollHandler(event => {
-    console.log(event.contentOffset.y);
     translationY.value = event.contentOffset.y;
   });
 

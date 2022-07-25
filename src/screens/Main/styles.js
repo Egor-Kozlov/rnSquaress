@@ -7,5 +7,6 @@ export default StyleSheet.create({
   },
   scroll: {
     flex: 1,
+    zIndex: 5,
   },
 });

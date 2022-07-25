@@ -7,14 +7,24 @@
  */
 
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  StatusBar,
+  Platform,
+} from 'react-native';
 import Main from './src/screens/Main/Main';
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <Main />
-    </View>
+    <>
+      <StatusBar barStyle="dark-content" backgroundColor={'#fff'} />
+      <View style={styles.container}>
+        <Main />
+        {Platform.OS === 'ios' && <SafeAreaView />}
+      </View>
+    </>
   );
 };
 
@@ -23,6 +33,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     // paddingTop: StatusBar.currentHeight,
+    flexDirection: 'column-reverse',
   },
 });
 
