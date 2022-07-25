@@ -1,26 +1,28 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
-export default async function useRequest() {
-  const [data, setData] = React.useState();
-  const [error, setError] = React.useState();
-  const [loading, setLoading] = React.useState(false);
+export default function useRequest(url, options = {}) {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const request = async (url, options = {}) => {
-    setLoading(true);
-    try {
-      const response = await fetch(url, options);
-      const json = await response.json();
-      setData(json);
-    } catch (error) {
-      setError(error);
-    }
-    setLoading(false);
-  };
+  useEffect(() => {
+    (async function () {
+      try {
+        setLoading(true);
+        const response = await fetch(url);
+        const json = await response.json();
+        setData(json);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [url]);
 
   return {
     data,
     error,
     loading,
-    request,
   };
 }

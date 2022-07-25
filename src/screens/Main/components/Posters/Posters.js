@@ -5,36 +5,20 @@ import Title from '../../../../components/Title/Title';
 import WhiteBox from './components/WhiteBox';
 import BookItem from './components/BookItem';
 import GenreItem from './components/GenreItem';
+import useRequest from '../../../../hooks/useRequest';
 
 const Posters = () => {
-  const [data, setData] = useState();
+  const {data, error, loading} = useRequest(
+    'https://rss.applemarketingtools.com/api/v2/us/books/top-paid/50/books.json',
+  );
+
+  if (error) {
+    console.log(error);
+  }
+
   const [visibleBooks, setVisibleBooks] = useState([]);
-  const [isLoading, setIsLoading] = useState();
   const [genres, setGenres] = useState([]);
   const [pickedGenres, setPickedGenres] = useState([]);
-
-  const request = async () => {
-    setIsLoading(true);
-    const response = await fetch(
-      'https://rss.applemarketingtools.com/api/v2/us/books/top-paid/50/books.json',
-    );
-    const json = await response.json();
-    console.log(json);
-    setData(json);
-    setVisibleBooks(json.feed.results);
-    setIsLoading(false);
-  };
-
-  const renderBooks = ({item}) => {
-    return (
-      <BookItem
-        author={item.artistName}
-        name={item.name}
-        genre={item.genres[0].name}
-        picture={item.artworkUrl100}
-      />
-    );
-  };
 
   const isGenrePicked = useCallback(
     genre => {
@@ -54,6 +38,17 @@ const Posters = () => {
     [pickedGenres, isGenrePicked],
   );
 
+  const renderBooks = ({item}) => {
+    return (
+      <BookItem
+        author={item.artistName}
+        name={item.name}
+        genre={item.genres[0].name}
+        picture={item.artworkUrl100}
+      />
+    );
+  };
+
   const renderGenres = ({item}) => {
     return (
       <GenreItem
@@ -63,10 +58,6 @@ const Posters = () => {
       />
     );
   };
-
-  useEffect(() => {
-    request();
-  }, []);
 
   useEffect(() => {
     if (data) {
@@ -136,14 +127,13 @@ const Posters = () => {
             data={visibleBooks}
             renderItem={renderBooks}
             keyExtractor={item => item.id}
-            onEndReached={request}
           />
         ) : (
-          !isLoading && (
+          !loading && (
             <Text style={styles.noResultsText}>Нет подходящих книг</Text>
           )
         )}
-        {isLoading && (
+        {loading && (
           <ActivityIndicator
             style={styles.activityIndicator}
             size="large"

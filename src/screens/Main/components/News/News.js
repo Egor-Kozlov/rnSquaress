@@ -4,6 +4,7 @@ import styles from './styles';
 import Title from '../../../../components/Title/Title';
 import Item from './Item/Item';
 import convertDate from '../../../../modules/convertDate';
+import useRequest from '../../../../hooks/useRequest';
 
 const keyApi = '6e58d54dec8049669945889329fb8d82';
 
