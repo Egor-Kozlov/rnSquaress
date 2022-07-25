@@ -44,6 +44,7 @@ export default StyleSheet.create({
     width: '100%',
     paddingHorizontal: 20,
     paddingBottom: 22,
+    position: 'relative',
   },
   input: {
     backgroundColor: '#F6F6F6',
@@ -51,6 +52,11 @@ export default StyleSheet.create({
     paddingLeft: 50,
     paddingRight: 20,
     borderRadius: 20,
+  },
+  activeInput: {
+    borderWidth: 1,
+    borderColor: '#b3bae3',
+    marginLeft: -1,
   },
   searchIcon: {
     position: 'absolute',
@@ -64,5 +70,44 @@ export default StyleSheet.create({
     backgroundColor: '#ffffff',
     position: 'absolute',
     top: -70,
+  },
+  searchList: {
+    width: '100%',
+    backgroundColor: '#c7c7c7',
+    position: 'absolute',
+    top: 60,
+    right: 0,
+    left: 0,
+    marginHorizontal: 20,
+    borderRadius: 20,
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.14,
+    shadowRadius: 6.59,
+    elevation: 5,
+  },
+  searchItem: {
+    width: '100%',
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+    borderBottomColor: '#EFEFEF',
+    borderBottomWidth: 1,
+    backgroundColor: '#fff',
+  },
+  searchItemTitle: {
+    fontSize: 14,
+    fontFamily: 'Montserrat-Regular',
+    color: '#545353',
+  },
+  firstItem: {
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  lastItem: {
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
   },
 });

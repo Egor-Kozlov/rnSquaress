@@ -5,14 +5,16 @@ import Animated, {
   useAnimatedStyle,
   interpolate,
 } from 'react-native-reanimated';
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './styles';
 import LocationIcon from './icons/location-icon.svg';
 import PersonIcon from './icons/person-icon.svg';
 import SearchIcon from './icons/search-icon.svg';
 
 const Header = ({animatedProps}) => {
-  // console.log('animatedProps: ', animatedProps.initial.value.value);
+  const [inputValue, setInputValue] = useState('');
+  const [isFocusInput, setIsFocusInput] = useState(false);
+  const [searchVariants, setSearchVariants] = useState(false);
 
   const animatedScrollStyle = useAnimatedStyle(() => {
     const transform = interpolate(
@@ -38,6 +40,16 @@ const Header = ({animatedProps}) => {
     };
   });
 
+  const result = [
+    'Первый',
+    'Второй',
+    'Третий',
+    'Четвертый',
+    'Четвертый',
+    'Четвертый',
+    'Четвертый',
+  ];
+
   return (
     <Animated.View style={[styles.hiddenContainer, animatedScrollStyle]}>
       <View style={styles.container}>
@@ -52,10 +64,45 @@ const Header = ({animatedProps}) => {
         </View>
         <Animated.View style={[styles.inputContainer, animatedFade]}>
           <TextInput
-            style={styles.input}
+            value={inputValue}
+            onChangeText={setInputValue}
+            onFocus={() => {
+              setIsFocusInput(true);
+            }}
+            style={[styles.input, isFocusInput && styles.activeInput]}
             placeholder="Поиск мест и событий"
-            onBlur={() => Keyboard.dismiss()}
+            onBlur={() => {
+              Keyboard.dismiss();
+              setIsFocusInput(false);
+            }}
           />
+          {inputValue && isFocusInput && (
+            <View style={[styles.searchList]}>
+              {result.map((item, index) => (
+                <TouchableOpacity
+                  key={item}
+                  style={[
+                    styles.searchItem,
+                    index === 0 && styles.firstItem,
+                    index === result.length - 1 && styles.lastItem,
+                  ]}>
+                  <Text style={styles.searchItemTitle}>{item}</Text>
+                </TouchableOpacity>
+              ))}
+              {/* <TouchableOpacity style={[styles.searchItem]}>
+                <Text style={styles.searchItemTitle}>Some result...</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.searchItem]}>
+                <Text style={styles.searchItemTitle}>Some result...</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.searchItem]}>
+                <Text style={styles.searchItemTitle}>Some result...</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.searchItem]}>
+                <Text style={styles.searchItemTitle}>Some result...</Text>
+              </TouchableOpacity> */}
+            </View>
+          )}
           <SearchIcon style={styles.searchIcon} />
         </Animated.View>
       </View>
