@@ -130,7 +130,7 @@ const Header = ({animatedProps, scrollToPosition}) => {
             <View style={[styles.searchList]}>
               {searchVariants.map((item, index) => (
                 <TouchableOpacity
-                  key={item}
+                  key={item.relevantString}
                   onPress={() => {
                     setIsFocusInput(false);
                     setInputValue('');
