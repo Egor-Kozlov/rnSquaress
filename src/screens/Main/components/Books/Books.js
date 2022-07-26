@@ -1,5 +1,8 @@
 import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import React, {useState, useEffect, useCallback} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {addBooks, clearBooks} from '../../../../store/slices/books';
+import {addComponentsPosition} from '../../../../store/slices/componentsPosition';
 import styles from './styles';
 import Title from '../../../../components/Title/Title';
 import WhiteBox from './components/WhiteBox';
@@ -7,10 +10,12 @@ import BookItem from './components/BookItem';
 import GenreItem from './components/GenreItem';
 import useRequest from '../../../../hooks/useRequest';
 
-const Posters = () => {
+const Books = () => {
   const {data, error, loading} = useRequest(
     'https://rss.applemarketingtools.com/api/v2/us/books/top-paid/50/books.json',
   );
+
+  const dispatch = useDispatch();
 
   if (error) {
     console.log(error);
@@ -92,8 +97,23 @@ const Posters = () => {
     }
   }, [pickedGenres, data]);
 
+  useEffect(() => {
+    if (visibleBooks.length > 0) {
+      dispatch(addBooks(visibleBooks));
+    } else {
+      dispatch(clearBooks());
+    }
+  }, [visibleBooks, dispatch]);
+
   return (
-    <View style={styles.container}>
+    <View
+      style={styles.container}
+      onLayout={event => {
+        const {layout} = event.nativeEvent;
+        dispatch(
+          addComponentsPosition({componentName: 'books', position: layout.y}),
+        );
+      }}>
       <View style={styles.header}>
         <View style={styles.title}>
           <Title title="Афиша" arrowIcon />
@@ -145,4 +165,4 @@ const Posters = () => {
   );
 };
 
-export default Posters;
+export default Books;

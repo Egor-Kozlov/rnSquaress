@@ -98,6 +98,11 @@ export default StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Montserrat-Regular',
     color: '#545353',
+    width: '80%',
+  },
+  searchItemTitleHighlight: {
+    backgroundColor: '#d1d5ed',
+    borderRadius: 50,
   },
   searchItemLocation: {
     fontSize: 12,

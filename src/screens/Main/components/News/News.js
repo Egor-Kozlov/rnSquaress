@@ -1,5 +1,8 @@
 import {Text, View, TouchableOpacity, ActivityIndicator} from 'react-native';
 import React, {useEffect, useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {addNews, clearNews} from '../../../../store/slices/news';
+import {addComponentsPosition} from '../../../../store/slices/componentsPosition';
 import styles from './styles';
 import Title from '../../../../components/Title/Title';
 import Item from './Item/Item';
@@ -11,6 +14,7 @@ const News = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState();
   const [currentPage, setCurrentPage] = useState(1);
+  const dispatch = useDispatch();
 
   const request = async () => {
     setIsLoading(true);
@@ -18,6 +22,7 @@ const News = () => {
       `https://newsapi.org/v2/top-headlines?sources=techcrunch&pageSize=2&page=${currentPage}&apiKey=${keyApi}`,
     );
     const json = await response.json();
+    dispatch(addNews(json.articles));
     setData([...data, ...json.articles]);
     setCurrentPage(currentPage + 1);
     setIsLoading(false);
@@ -25,10 +30,21 @@ const News = () => {
 
   useEffect(() => {
     request();
+
+    return () => {
+      dispatch(clearNews());
+    };
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View
+      style={styles.container}
+      onLayout={event => {
+        const {layout} = event.nativeEvent;
+        dispatch(
+          addComponentsPosition({componentName: 'news', position: layout.y}),
+        );
+      }}>
       <View style={styles.titleContainer}>
         <Title title="Новости" arrowIcon={true} onPressFunc={() => {}} />
       </View>
