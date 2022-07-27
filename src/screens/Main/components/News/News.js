@@ -1,6 +1,6 @@
 import {Text, View, TouchableOpacity, ActivityIndicator} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {addNews, clearNews} from '../../../../store/slices/news';
 import {addComponentsPosition} from '../../../../store/slices/componentsPosition';
 import styles from './styles';

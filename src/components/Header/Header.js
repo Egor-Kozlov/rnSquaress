@@ -1,16 +1,11 @@
 import {Text, View, TouchableOpacity, TextInput, Keyboard} from 'react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedProps,
-  useAnimatedStyle,
-  interpolate,
-} from 'react-native-reanimated';
+import Animated, {useAnimatedStyle, interpolate} from 'react-native-reanimated';
 import React, {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import styles from './styles';
-import LocationIcon from './icons/location-icon.svg';
-import PersonIcon from './icons/person-icon.svg';
-import SearchIcon from './icons/search-icon.svg';
+import LocationIcon from '../../../assets/icons/location-icon';
+import PersonIcon from '../../../assets/icons/person-icon.svg';
+import SearchIcon from '../../../assets/icons/search-icon.svg';
 
 const Header = ({animatedProps, scrollToPosition}) => {
   const [inputValue, setInputValue] = useState('');

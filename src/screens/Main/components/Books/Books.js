@@ -1,6 +1,6 @@
 import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import React, {useState, useEffect, useCallback} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {addBooks, clearBooks} from '../../../../store/slices/books';
 import {addComponentsPosition} from '../../../../store/slices/componentsPosition';
 import styles from './styles';

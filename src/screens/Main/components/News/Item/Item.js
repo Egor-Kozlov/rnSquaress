@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
   Platform,
   ActivityIndicator,
@@ -9,12 +8,11 @@ import {
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import styles from './styles';
-import EyeIcon from './icons/eye-icon.svg';
+import EyeIcon from '../../../../../../assets/icons/eye-icon.svg';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
-  useDerivedValue,
 } from 'react-native-reanimated';
 
 const Item = ({title, date, author, image}) => {

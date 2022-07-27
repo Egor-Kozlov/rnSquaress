@@ -1,9 +1,9 @@
-import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
+import {View} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import styles from './styles';
 import entertainments from './content/entertainments';
 import Item from './Item/Item';
-import MoreIcon from './icons/more-icon.svg';
+import MoreIcon from '../../../../../assets/icons/servicesIcons/more-icon.svg';
 
 const ServicesList = () => {
   const [visibleService, setVisibleService] = useState([]);

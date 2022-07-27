@@ -1,4 +1,4 @@
-import {View, ScrollView, SafeAreaView} from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import ServicesList from './components/ServicesList/ServicesList';
@@ -10,9 +10,7 @@ import Animated, {
   useSharedValue,
   useAnimatedScrollHandler,
   useAnimatedProps,
-  useDerivedValue,
   useAnimatedRef,
-  scrollTo,
 } from 'react-native-reanimated';
 
 const Main = () => {
