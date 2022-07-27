@@ -1,14 +1,14 @@
 import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import React, {useState, useEffect, useCallback} from 'react';
 import {useDispatch} from 'react-redux';
-import {addBooks, clearBooks} from '../../../../store/slices/books';
-import {addComponentsPosition} from '../../../../store/slices/componentsPosition';
+import {addBooks, clearBooks} from '../../store/slices/books';
+import {addComponentsPosition} from '../../store/slices/componentsPosition';
 import styles from './styles';
-import Title from '../../../../components/Title/Title';
+import Title from '../Title/Title';
 import WhiteBox from './components/WhiteBox';
 import BookItem from './components/BookItem';
 import GenreItem from './components/GenreItem';
-import useRequest from '../../../../hooks/useRequest';
+import useRequest from '../../hooks/useRequest';
 
 const Books = () => {
   const {data, error, loading} = useRequest(

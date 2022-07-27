@@ -1,10 +1,8 @@
-import {StyleSheet} from 'react-native';
-
 import React from 'react';
-import RadioIcon from '../../../../../assets/icons/radio-icon.svg';
-import FruitIcon from '../../../../../assets/icons/fruit-icon.svg';
-import SoundIcon from '../../../../../assets/icons/sound-icon.svg';
-import BackpackIcon from '../../../../../assets/icons/backpack-icon.svg';
+import RadioIcon from '../../../assets/icons/radio-icon.svg';
+import FruitIcon from '../../../assets/icons/fruit-icon.svg';
+import SoundIcon from '../../../assets/icons/sound-icon.svg';
+import BackpackIcon from '../../../assets/icons/backpack-icon.svg';
 
 const popularItems = [
   {

@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import styles from './styles';
 import entertainments from './content/entertainments';
 import Item from './Item/Item';
-import MoreIcon from '../../../../../assets/icons/servicesIcons/more-icon.svg';
+import MoreIcon from '../../../assets/icons/servicesIcons/more-icon.svg';
 
 const ServicesList = () => {
   const [visibleService, setVisibleService] = useState([]);

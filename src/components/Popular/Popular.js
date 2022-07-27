@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './styles';
 import popularItems from './content';
 import Item from './Item/Item';
-import Title from '../../../../components/Title/Title';
+import Title from '../Title/Title';
 
 const Popular = () => {
   return (

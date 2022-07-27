@@ -1,12 +1,12 @@
 import {Text, View, TouchableOpacity, ActivityIndicator} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {addNews, clearNews} from '../../../../store/slices/news';
-import {addComponentsPosition} from '../../../../store/slices/componentsPosition';
+import {addNews, clearNews} from '../../store/slices/news';
+import {addComponentsPosition} from '../../store/slices/componentsPosition';
 import styles from './styles';
-import Title from '../../../../components/Title/Title';
+import Title from '../Title/Title';
 import Item from './Item/Item';
-import convertDate from '../../../../modules/convertDate';
+import convertDate from '../../modules/convertDate';
 
 const keyApi = '6e58d54dec8049669945889329fb8d82';
 

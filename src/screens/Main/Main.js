@@ -1,11 +1,11 @@
 import {View} from 'react-native';
 import React from 'react';
 import styles from './styles';
-import ServicesList from './components/ServicesList/ServicesList';
 import Header from '../../components/Header/Header';
-import Popular from './components/Popular/Popular';
-import News from './components/News/News';
-import Books from './components/Books/Books';
+import Popular from '../../components/Popular/Popular';
+import News from '../../components/News/News';
+import Books from '../../components/Books/Books';
+import ServicesList from '../../components/ServicesList/ServicesList';
 import Animated, {
   useSharedValue,
   useAnimatedScrollHandler,

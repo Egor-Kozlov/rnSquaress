@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import styles from './styles';
-import EyeIcon from '../../../../../../assets/icons/eye-icon.svg';
+import EyeIcon from '../../../../assets/icons/eye-icon.svg';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
