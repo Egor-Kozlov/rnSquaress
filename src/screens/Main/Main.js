@@ -24,12 +24,8 @@ const Main = () => {
     translationY.value = event.contentOffset.y;
   });
 
-  useDerivedValue(() => {
-    scrollTo(scrollRef, 0, translationY.value, true);
-  });
-
   const scrollToPosition = y => {
-    translationY.value = y;
+    scrollRef.current.scrollTo({x: 0, y: y, animated: true});
   };
 
   return (
