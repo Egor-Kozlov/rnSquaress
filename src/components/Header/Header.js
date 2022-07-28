@@ -1,5 +1,9 @@
 import {Text, View, TouchableOpacity, TextInput, Keyboard} from 'react-native';
-import Animated, {useAnimatedStyle, interpolate} from 'react-native-reanimated';
+import Animated, {
+  useAnimatedStyle,
+  interpolate,
+  log,
+} from 'react-native-reanimated';
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import styles from './styles';
@@ -41,30 +45,62 @@ const Header = ({animatedProps, scrollToPosition}) => {
     };
   });
 
+  const highlightText = string =>
+    string.split('').map((word, i) => (
+      <Text key={i}>
+        <Text style={styles.searchItemTitleHighlight}>{word}</Text>
+      </Text>
+    ));
+
   useEffect(() => {
-    // console.log(booksFromStore);
     if (isFocusInput && inputValue.length > 1) {
-      console.log('componentsScrollPositions: ', componentsScrollPositions);
       const searchableValue = inputValue.toLowerCase();
-      const findRelevantItems = [];
 
       const findNews = () => {
         const findRelevantNews = newsFromStore.value.reduce((acc, news) => {
           const {author, description} = news;
-          if (author.toLowerCase().includes(searchableValue)) {
-            acc.push({
-              relevantString: author,
-              located: 'news',
-              finderParameter: 'author',
-            });
-          }
+
           if (description.toLowerCase().includes(searchableValue)) {
             acc.push({
-              relevantString: description,
+              // get string before searchableValue
+              stringBeforeSearchableValue: description.slice(
+                0,
+                description.toLowerCase().indexOf(searchableValue),
+              ),
+              // get string after searchableValue
+              stringAfterSearchableValue: description.slice(
+                description.toLowerCase().indexOf(searchableValue) +
+                  searchableValue.length,
+              ),
+              searchableValue: inputValue,
+
               located: 'news',
               finderParameter: 'description',
             });
           }
+
+          if (author.toLowerCase().includes(searchableValue)) {
+            acc.push({
+              // get string before searchableValue
+              stringBeforeSearchableValue: author.slice(
+                0,
+                author.toLowerCase().indexOf(searchableValue),
+              ),
+              // get string after searchableValue
+              stringAfterSearchableValue: author.slice(
+                author.toLowerCase().indexOf(searchableValue) +
+                  searchableValue.length,
+              ),
+              searchableValue: author.slice(
+                author.toLowerCase().indexOf(searchableValue),
+                author.toLowerCase().indexOf(searchableValue) +
+                  searchableValue.length,
+              ),
+              located: 'news',
+              finderParameter: 'author',
+            });
+          }
+
           return acc;
         }, []);
         return findRelevantNews;
@@ -72,16 +108,45 @@ const Header = ({animatedProps, scrollToPosition}) => {
       const findBooks = () => {
         const findRelevantBooks = booksFromStore.value.reduce((acc, book) => {
           const {artistName, name} = book;
+
           if (artistName.toLowerCase().includes(searchableValue)) {
             acc.push({
-              relevantString: artistName,
+              // get string before searchableValue
+              stringBeforeSearchableValue: artistName.slice(
+                0,
+                artistName.toLowerCase().indexOf(searchableValue),
+              ),
+              // get string after searchableValue
+              stringAfterSearchableValue: artistName.slice(
+                artistName.toLowerCase().indexOf(searchableValue) +
+                  searchableValue.length,
+              ),
+              searchableValue: artistName.slice(
+                artistName.toLowerCase().indexOf(searchableValue),
+                artistName.toLowerCase().indexOf(searchableValue) +
+                  searchableValue.length,
+              ),
               located: 'books',
               finderParameter: 'artistName',
             });
           }
           if (name.toLowerCase().includes(searchableValue)) {
             acc.push({
-              relevantString: name,
+              // get string before searchableValue
+              stringBeforeSearchableValue: name.slice(
+                0,
+                name.toLowerCase().indexOf(searchableValue),
+              ),
+              // get string after searchableValue
+              stringAfterSearchableValue: name.slice(
+                name.toLowerCase().indexOf(searchableValue) +
+                  searchableValue.length,
+              ),
+              searchableValue: name.slice(
+                name.toLowerCase().indexOf(searchableValue),
+                name.toLowerCase().indexOf(searchableValue) +
+                  searchableValue.length,
+              ),
               located: 'books',
               finderParameter: 'name',
             });
@@ -90,10 +155,15 @@ const Header = ({animatedProps, scrollToPosition}) => {
         }, []);
         return findRelevantBooks;
       };
-      findNews();
       setSearchVariants([...findNews(), ...findBooks()]);
     }
-  }, [isFocusInput, inputValue, newsFromStore, booksFromStore]);
+  }, [
+    isFocusInput,
+    inputValue,
+    newsFromStore,
+    booksFromStore,
+    componentsScrollPositions,
+  ]);
 
   return (
     <Animated.View style={[styles.hiddenContainer, animatedScrollStyle]}>
@@ -137,13 +207,14 @@ const Header = ({animatedProps, scrollToPosition}) => {
                     index === 0 && styles.firstItem,
                     index === searchVariants.length - 1 && styles.lastItem,
                   ]}>
-                  <Text
-                    style={[
-                      styles.searchItemTitle,
-                      // styles.searchItemTitleHighlight,
-                    ]}>
-                    {item.relevantString}
-                  </Text>
+                  <View style={styles.searchItemTitle}>
+                    <Text style={styles.searchItemTitle}>
+                      {item.stringBeforeSearchableValue}
+                      {highlightText(item.searchableValue)}
+                      {''}
+                      {item.stringAfterSearchableValue}
+                    </Text>
+                  </View>
                   <Text
                     style={
                       styles.searchItemLocation

@@ -68,6 +68,7 @@ export default StyleSheet.create({
   },
   searchList: {
     width: '100%',
+    // height: 400,
     backgroundColor: '#c7c7c7',
     position: 'absolute',
     top: 60,
@@ -103,6 +104,7 @@ export default StyleSheet.create({
   searchItemTitleHighlight: {
     backgroundColor: '#d1d5ed',
     borderRadius: 50,
+    paddingRight: 0,
   },
   searchItemLocation: {
     fontSize: 12,
