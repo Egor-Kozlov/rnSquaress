@@ -1,9 +1,5 @@
 import {Text, View, TouchableOpacity, TextInput, Keyboard} from 'react-native';
-import Animated, {
-  useAnimatedStyle,
-  interpolate,
-  log,
-} from 'react-native-reanimated';
+import Animated, {useAnimatedStyle, interpolate} from 'react-native-reanimated';
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import styles from './styles';
@@ -195,7 +191,7 @@ const Header = ({animatedProps, scrollToPosition}) => {
             <View style={[styles.searchList]}>
               {searchVariants.map((item, index) => (
                 <TouchableOpacity
-                  key={item.relevantString}
+                  key={item.stringBeforeSearchableValue}
                   onPress={() => {
                     setIsFocusInput(false);
                     setInputValue('');

@@ -52,7 +52,7 @@ const News = () => {
         {data.length > 0 ? (
           data.map((item, index) => (
             <Item
-              key={item.title}
+              key={item.title + index}
               title={item.description}
               date={convertDate(item.publishedAt)}
               author={item.author}
