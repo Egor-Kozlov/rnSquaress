@@ -13,7 +13,7 @@ import Animated, {
   useAnimatedRef,
 } from 'react-native-reanimated';
 
-const Main = () => {
+const Main = ({navigation}) => {
   const scrollRef = useAnimatedRef();
   const translationY = useSharedValue(0);
   const animatedProps = useAnimatedProps(() => translationY);
@@ -37,7 +37,7 @@ const Main = () => {
         onScroll={scrollHandler}
         ref={scrollRef}
         scrollEventThrottle={16}>
-        <ServicesList />
+        <ServicesList navigation={navigation} />
         <Popular />
         <News />
         <Books />

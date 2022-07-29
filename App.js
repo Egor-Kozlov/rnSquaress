@@ -6,16 +6,16 @@ import {
   StatusBar,
   Platform,
 } from 'react-native';
-import Main from './src/screens/Main/Main';
 import {Provider} from 'react-redux';
 import store from './src/store/store';
+import Router from './src/router/Router';
 
 const App = () => {
   return (
     <Provider store={store}>
       <StatusBar barStyle="dark-content" backgroundColor={'#fff'} />
       <View style={styles.container}>
-        <Main />
+        <Router />
         {Platform.OS === 'ios' && <SafeAreaView />}
       </View>
     </Provider>

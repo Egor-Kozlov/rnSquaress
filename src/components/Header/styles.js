@@ -67,15 +67,14 @@ export default StyleSheet.create({
     top: -70,
   },
   searchList: {
-    width: '100%',
-    // height: 400,
-    backgroundColor: '#c7c7c7',
-    position: 'absolute',
-    top: 60,
-    right: 0,
-    left: 0,
-    marginHorizontal: 20,
+    height: '100%',
     borderRadius: 20,
+  },
+  listContainer: {
+    position: 'absolute',
+    top: 45,
+    left: 20,
+    height: 500,
     shadowColor: '#000000',
     shadowOffset: {
       width: 0,
@@ -84,6 +83,7 @@ export default StyleSheet.create({
     shadowOpacity: 0.14,
     shadowRadius: 6.59,
     elevation: 5,
+    borderRadius: 20,
   },
   searchItem: {
     width: '100%',

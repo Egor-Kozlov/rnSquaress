@@ -4,8 +4,9 @@ import styles from './styles';
 import entertainments from './content/entertainments';
 import Item from './Item/Item';
 import MoreIcon from '../../../assets/icons/servicesIcons/more-icon.svg';
+import SCREEN_LIST from '../../router/screen-list';
 
-const ServicesList = () => {
+const ServicesList = ({navigation}) => {
   const [visibleService, setVisibleService] = useState([]);
 
   const showFirstFiveServices = () => {
@@ -28,7 +29,11 @@ const ServicesList = () => {
             key={item.title}
             title={item.title}
             icon={item.icon}
-            onPressFunc={showFirstFiveServices}
+            onPressFunc={
+              item.title === 'Здоровье'
+                ? () => navigation.navigate(SCREEN_LIST.Health)
+                : showFirstFiveServices
+            }
             border={index === visibleService.length - 2 ? 'left' : null}
             disableBorderTop={index === 0 || index === 1 || index === 2}
           />

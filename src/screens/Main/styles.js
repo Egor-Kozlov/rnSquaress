@@ -4,6 +4,7 @@ export default StyleSheet.create({
   mainContainer: {
     height: '100%',
     flex: 1,
+    backgroundColor: '#fff',
   },
   scroll: {
     flex: 1,

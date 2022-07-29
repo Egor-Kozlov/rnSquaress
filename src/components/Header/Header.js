@@ -1,4 +1,12 @@
-import {Text, View, TouchableOpacity, TextInput, Keyboard} from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  TextInput,
+  Keyboard,
+  FlatList,
+  Platform,
+} from 'react-native';
 import Animated, {useAnimatedStyle, interpolate} from 'react-native-reanimated';
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
@@ -6,6 +14,7 @@ import styles from './styles';
 import LocationIcon from '../../../assets/icons/location-icon';
 import PersonIcon from '../../../assets/icons/person-icon.svg';
 import SearchIcon from '../../../assets/icons/search-icon.svg';
+import highlightText from '../../modules/highlightText';
 
 const Header = ({animatedProps, scrollToPosition}) => {
   const [inputValue, setInputValue] = useState('');
@@ -41,12 +50,37 @@ const Header = ({animatedProps, scrollToPosition}) => {
     };
   });
 
-  const highlightText = string =>
-    string.split('').map((word, i) => (
-      <Text key={i}>
-        <Text style={styles.searchItemTitleHighlight}>{word}</Text>
-      </Text>
-    ));
+  const renderSearchItem = ({item, index}) => {
+    return (
+      <TouchableOpacity
+        activeOpacity={0.8}
+        key={item.stringBeforeSearchableValue}
+        onPress={() => {
+          setIsFocusInput(false);
+          setInputValue('');
+          Keyboard.dismiss();
+          scrollToPosition(componentsScrollPositions[item.located]);
+        }}
+        style={[
+          styles.searchItem,
+          index === 0 && styles.firstItem,
+          index === searchVariants.length - 1 && styles.lastItem,
+        ]}>
+        <View style={styles.searchItemTitle}>
+          <Text style={styles.searchItemTitle}>
+            {item.stringBeforeSearchableValue}
+            {highlightText(
+              item.searchableValue,
+              styles.searchItemTitleHighlight,
+            )}
+            {''}
+            {item.stringAfterSearchableValue}
+          </Text>
+        </View>
+        <Text style={styles.searchItemLocation}>{`in ${item.located}`}</Text>
+      </TouchableOpacity>
+    );
+  };
 
   useEffect(() => {
     if (isFocusInput && inputValue.length > 1) {
@@ -188,35 +222,17 @@ const Header = ({animatedProps, scrollToPosition}) => {
             }}
           />
           {inputValue.length > 1 && isFocusInput && searchVariants.length >= 1 && (
-            <View style={[styles.searchList]}>
-              {searchVariants.map((item, index) => (
-                <TouchableOpacity
-                  key={item.stringBeforeSearchableValue}
-                  onPress={() => {
-                    setIsFocusInput(false);
-                    setInputValue('');
-                    Keyboard.dismiss();
-                    scrollToPosition(componentsScrollPositions[item.located]);
-                  }}
-                  style={[
-                    styles.searchItem,
-                    index === 0 && styles.firstItem,
-                    index === searchVariants.length - 1 && styles.lastItem,
-                  ]}>
-                  <View style={styles.searchItemTitle}>
-                    <Text style={styles.searchItemTitle}>
-                      {item.stringBeforeSearchableValue}
-                      {highlightText(item.searchableValue)}
-                      {''}
-                      {item.stringAfterSearchableValue}
-                    </Text>
-                  </View>
-                  <Text
-                    style={
-                      styles.searchItemLocation
-                    }>{`in ${item.located}`}</Text>
-                </TouchableOpacity>
-              ))}
+            <View style={styles.listContainer}>
+              <FlatList
+                scrollEnabled={Platform.OS === 'ios' ? true : false}
+                style={styles.searchList}
+                data={searchVariants}
+                extraData={searchVariants}
+                keyExtractor={(item, index) =>
+                  item.stringBeforeSearchableValue + index
+                }
+                renderItem={(item, index) => renderSearchItem(item, index)}
+              />
             </View>
           )}
           <SearchIcon style={styles.searchIcon} />
