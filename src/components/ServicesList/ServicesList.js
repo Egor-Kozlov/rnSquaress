@@ -7,6 +7,7 @@ import MoreIcon from '../../../assets/icons/servicesIcons/more-icon.svg';
 import SCREEN_LIST from '../../router/screen-list';
 
 const ServicesList = ({navigation}) => {
+  console.log('navigation: ', navigation);
   const [visibleService, setVisibleService] = useState([]);
 
   const showFirstFiveServices = () => {

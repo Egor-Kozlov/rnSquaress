@@ -8,12 +8,28 @@ import Main from '../screens/Main/Main';
 
 const Stack = createNativeStackNavigator();
 
-export default function Navigate() {
+export default function Navigate({scrollRef, scrollHandler}) {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name={SCREEN_LIST.Main} component={Main} />
-        <Stack.Screen name={SCREEN_LIST.Health} component={Health} />
+        <Stack.Screen name={SCREEN_LIST.Main}>
+          {({navigation}) => (
+            <Main
+              scrollRef={scrollRef}
+              scrollHandler={scrollHandler}
+              navigation={navigation}
+            />
+          )}
+        </Stack.Screen>
+        <Stack.Screen name={SCREEN_LIST.Health}>
+          {({navigation}) => (
+            <Health
+              scrollRef={scrollRef}
+              scrollHandler={scrollHandler}
+              navigation={navigation}
+            />
+          )}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

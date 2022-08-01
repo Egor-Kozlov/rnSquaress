@@ -1,37 +1,25 @@
 import {View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './styles';
 import Header from '../../components/Header/Header';
 import Popular from '../../components/Popular/Popular';
 import News from '../../components/News/News';
 import Books from '../../components/Books/Books';
 import ServicesList from '../../components/ServicesList/ServicesList';
-import Animated, {
-  useSharedValue,
-  useAnimatedScrollHandler,
-  useAnimatedProps,
-  useAnimatedRef,
-} from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
+import useHeaderScroll from '../../hooks/useHeaderScroll';
+import {useDispatch} from 'react-redux';
+import {changeScreen} from '../../store/slices/currentScreen';
 
-const Main = ({navigation}) => {
-  const scrollRef = useAnimatedRef();
-  const translationY = useSharedValue(0);
-  const animatedProps = useAnimatedProps(() => translationY);
+const Main = ({navigation, scrollHandler, scrollRef}) => {
+  const dispatch = useDispatch();
 
-  const scrollHandler = useAnimatedScrollHandler(event => {
-    translationY.value = event.contentOffset.y;
-  });
-
-  const scrollToPosition = y => {
-    scrollRef.current.scrollTo({x: 0, y: y, animated: true});
-  };
+  useEffect(() => {
+    dispatch(changeScreen('Main'));
+  }, []);
 
   return (
     <View style={styles.mainContainer}>
-      <Header
-        animatedProps={animatedProps}
-        scrollToPosition={scrollToPosition}
-      />
       <Animated.ScrollView
         style={styles.scroll}
         onScroll={scrollHandler}

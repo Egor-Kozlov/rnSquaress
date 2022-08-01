@@ -26,6 +26,12 @@ const Header = ({animatedProps, scrollToPosition}) => {
     state => state.componentsPosition.value,
   );
 
+  const currentScreen = useSelector(state => state.currentScreen.value);
+
+  useEffect(() => {
+    console.log('currentScreen: ', currentScreen);
+  }, [currentScreen]);
+
   const animatedScrollStyle = useAnimatedStyle(() => {
     const transform = interpolate(
       animatedProps.initial.value.value,
