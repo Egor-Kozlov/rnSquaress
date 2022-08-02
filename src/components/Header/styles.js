@@ -35,6 +35,25 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
   },
+  section: {
+    width: 70,
+    height: 25,
+    // borderWidth: 1,
+    // borderColor: 'green',
+    flexDirection: 'row',
+    // justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  leftSection: {},
+  rightSection: {},
+  locationIcon: {
+    position: 'absolute',
+    // left: 40,
+  },
+  personIcon: {
+    position: 'absolute',
+    right: 0,
+  },
   inputContainer: {
     width: '100%',
     paddingHorizontal: 20,

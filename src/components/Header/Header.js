@@ -7,14 +7,23 @@ import {
   FlatList,
   Platform,
 } from 'react-native';
-import Animated, {useAnimatedStyle, interpolate} from 'react-native-reanimated';
+import Animated, {
+  useAnimatedStyle,
+  interpolate,
+  withTiming,
+  Easing,
+} from 'react-native-reanimated';
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import styles from './styles';
 import LocationIcon from '../../../assets/icons/location-icon';
 import PersonIcon from '../../../assets/icons/person-icon.svg';
 import SearchIcon from '../../../assets/icons/search-icon.svg';
+import MenuIcon from '../../../assets/icons/menu-icon.svg';
+import BlueSearchIcon from '../../../assets/icons/blueSearch-icon.svg';
 import highlightText from '../../modules/highlightText';
+import searchNews from '../../services/searchNews';
+import searchBooks from '../../services/searchBooks';
 
 const Header = ({animatedProps, scrollToPosition}) => {
   const [inputValue, setInputValue] = useState('');
@@ -28,32 +37,69 @@ const Header = ({animatedProps, scrollToPosition}) => {
 
   const currentScreen = useSelector(state => state.currentScreen.value);
 
-  useEffect(() => {
-    console.log('currentScreen: ', currentScreen);
-  }, [currentScreen]);
-
+  //header scroll animations
   const animatedScrollStyle = useAnimatedStyle(() => {
-    const transform = interpolate(
-      animatedProps.initial.value.value,
-      [-300, 0, 140, Infinity],
-      [130, 130, 62, 62],
-      'clamp',
-    );
+    const transform =
+      currentScreen === 'Main'
+        ? interpolate(
+            animatedProps.initial.value.value,
+            [-300, 0, 140, Infinity],
+            [130, 130, 62, 62],
+            'clamp',
+          )
+        : withTiming(62, {
+            duration: 900,
+            easing: Easing.out(Easing.ease),
+          });
     return {
       height: transform,
     };
   });
 
   const animatedFade = useAnimatedStyle(() => {
-    const fade = interpolate(
-      animatedProps.initial.value.value,
-      [-300, 0, 100, Infinity],
-      [1, 1, 0, 0],
-      'clamp',
-    );
+    const fade =
+      currentScreen === 'Main'
+        ? interpolate(
+            animatedProps.initial.value.value,
+            [-300, 0, 70, Infinity],
+            [1, 1, 0, 0],
+            'clamp',
+          )
+        : withTiming(0, {
+            duration: 400,
+            easing: Easing.out(Easing.ease),
+          });
     return {
       opacity: fade,
     };
+  });
+
+  const animatedLocationIconPosition = useAnimatedStyle(() => {
+    const iconPosition =
+      currentScreen === 'Main'
+        ? withTiming(0, {
+            duration: 500,
+            easing: Easing.out(Easing.ease),
+          })
+        : withTiming(48, {
+            duration: 500,
+            easing: Easing.out(Easing.ease),
+          });
+    return {left: iconPosition};
+  });
+
+  const animatedFadeIcon = useAnimatedStyle(() => {
+    const fade =
+      currentScreen === 'Main'
+        ? withTiming(0, {
+            duration: 300,
+            easing: Easing.out(Easing.ease),
+          })
+        : withTiming(1, {
+            duration: 800,
+            easing: Easing.out(Easing.ease),
+          });
+    return {opacity: fade};
   });
 
   const renderSearchItem = ({item, index}) => {
@@ -92,106 +138,10 @@ const Header = ({animatedProps, scrollToPosition}) => {
     if (isFocusInput && inputValue.length > 1) {
       const searchableValue = inputValue.toLowerCase();
 
-      const findNews = () => {
-        const findRelevantNews = newsFromStore.value.reduce((acc, news) => {
-          const {author, description} = news;
-
-          if (description.toLowerCase().includes(searchableValue)) {
-            acc.push({
-              // get string before searchableValue
-              stringBeforeSearchableValue: description.slice(
-                0,
-                description.toLowerCase().indexOf(searchableValue),
-              ),
-              // get string after searchableValue
-              stringAfterSearchableValue: description.slice(
-                description.toLowerCase().indexOf(searchableValue) +
-                  searchableValue.length,
-              ),
-              searchableValue: inputValue,
-
-              located: 'news',
-              finderParameter: 'description',
-            });
-          }
-
-          if (author.toLowerCase().includes(searchableValue)) {
-            acc.push({
-              // get string before searchableValue
-              stringBeforeSearchableValue: author.slice(
-                0,
-                author.toLowerCase().indexOf(searchableValue),
-              ),
-              // get string after searchableValue
-              stringAfterSearchableValue: author.slice(
-                author.toLowerCase().indexOf(searchableValue) +
-                  searchableValue.length,
-              ),
-              searchableValue: author.slice(
-                author.toLowerCase().indexOf(searchableValue),
-                author.toLowerCase().indexOf(searchableValue) +
-                  searchableValue.length,
-              ),
-              located: 'news',
-              finderParameter: 'author',
-            });
-          }
-
-          return acc;
-        }, []);
-        return findRelevantNews;
-      };
-      const findBooks = () => {
-        const findRelevantBooks = booksFromStore.value.reduce((acc, book) => {
-          const {artistName, name} = book;
-
-          if (artistName.toLowerCase().includes(searchableValue)) {
-            acc.push({
-              // get string before searchableValue
-              stringBeforeSearchableValue: artistName.slice(
-                0,
-                artistName.toLowerCase().indexOf(searchableValue),
-              ),
-              // get string after searchableValue
-              stringAfterSearchableValue: artistName.slice(
-                artistName.toLowerCase().indexOf(searchableValue) +
-                  searchableValue.length,
-              ),
-              searchableValue: artistName.slice(
-                artistName.toLowerCase().indexOf(searchableValue),
-                artistName.toLowerCase().indexOf(searchableValue) +
-                  searchableValue.length,
-              ),
-              located: 'books',
-              finderParameter: 'artistName',
-            });
-          }
-          if (name.toLowerCase().includes(searchableValue)) {
-            acc.push({
-              // get string before searchableValue
-              stringBeforeSearchableValue: name.slice(
-                0,
-                name.toLowerCase().indexOf(searchableValue),
-              ),
-              // get string after searchableValue
-              stringAfterSearchableValue: name.slice(
-                name.toLowerCase().indexOf(searchableValue) +
-                  searchableValue.length,
-              ),
-              searchableValue: name.slice(
-                name.toLowerCase().indexOf(searchableValue),
-                name.toLowerCase().indexOf(searchableValue) +
-                  searchableValue.length,
-              ),
-              located: 'books',
-              finderParameter: 'name',
-            });
-          }
-          return acc;
-        }, []);
-        return findRelevantBooks;
-      };
-      setSearchVariants([...findNews(), ...findBooks()]);
+      setSearchVariants([
+        ...searchNews(newsFromStore.value, searchableValue),
+        ...searchBooks(booksFromStore.value, searchableValue),
+      ]);
     }
   }, [
     isFocusInput,
@@ -205,13 +155,32 @@ const Header = ({animatedProps, scrollToPosition}) => {
     <Animated.View style={[styles.hiddenContainer, animatedScrollStyle]}>
       <View style={styles.container}>
         <View style={styles.content}>
-          <TouchableOpacity>
-            <LocationIcon />
-          </TouchableOpacity>
+          <Animated.View style={[styles.section, styles.leftSection]}>
+            {currentScreen !== 'Main' && (
+              <Animated.View style={animatedFadeIcon}>
+                <TouchableOpacity>
+                  <MenuIcon />
+                </TouchableOpacity>
+              </Animated.View>
+            )}
+            <Animated.View
+              style={[styles.locationIcon, animatedLocationIconPosition]}>
+              <TouchableOpacity>
+                <LocationIcon />
+              </TouchableOpacity>
+            </Animated.View>
+          </Animated.View>
           <Text style={styles.title}>Логотип</Text>
-          <TouchableOpacity>
-            <PersonIcon />
-          </TouchableOpacity>
+          <View style={[styles.section, styles.rightSection]}>
+            <Animated.View style={animatedFadeIcon}>
+              <TouchableOpacity>
+                <BlueSearchIcon />
+              </TouchableOpacity>
+            </Animated.View>
+            <TouchableOpacity style={styles.personIcon}>
+              <PersonIcon />
+            </TouchableOpacity>
+          </View>
         </View>
         <Animated.View style={[styles.inputContainer, animatedFade]}>
           <TextInput

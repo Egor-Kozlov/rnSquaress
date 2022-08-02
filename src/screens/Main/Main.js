@@ -1,5 +1,5 @@
 import {View} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import styles from './styles';
 import Header from '../../components/Header/Header';
 import Popular from '../../components/Popular/Popular';
@@ -10,13 +10,20 @@ import Animated from 'react-native-reanimated';
 import useHeaderScroll from '../../hooks/useHeaderScroll';
 import {useDispatch} from 'react-redux';
 import {changeScreen} from '../../store/slices/currentScreen';
+import {useRoute, useFocusEffect} from '@react-navigation/native';
 
 const Main = ({navigation, scrollHandler, scrollRef}) => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  //set current screen to store
+  const setCurrentScreenToStore = useCallback(() => {
     dispatch(changeScreen('Main'));
-  }, []);
+  }, [dispatch]);
+
+  //called when screen is focused
+  useFocusEffect(() => {
+    setCurrentScreenToStore();
+  });
 
   return (
     <View style={styles.mainContainer}>

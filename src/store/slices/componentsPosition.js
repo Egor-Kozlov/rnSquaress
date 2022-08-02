@@ -13,7 +13,6 @@ export const componentsPositionSlice = createSlice({
         ...state.value,
         [action.payload.componentName]: action.payload.position,
       };
-      console.log('componentsPositionSlice: ', state.value);
     },
   },
 });
