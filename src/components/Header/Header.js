@@ -25,7 +25,8 @@ import highlightText from '../../modules/highlightText';
 import searchNews from '../../services/searchNews';
 import searchBooks from '../../services/searchBooks';
 
-const Header = ({animatedProps, scrollToPosition}) => {
+const Header = ({animatedProps, scrollToPosition, setDisableScroll}) => {
+  const [showAddIcons, setShowAddIcons] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [isFocusInput, setIsFocusInput] = useState(false);
   const [searchVariants, setSearchVariants] = useState([]);
@@ -48,8 +49,7 @@ const Header = ({animatedProps, scrollToPosition}) => {
             'clamp',
           )
         : withTiming(62, {
-            duration: 900,
-            easing: Easing.out(Easing.ease),
+            duration: 300,
           });
     return {
       height: transform,
@@ -66,7 +66,7 @@ const Header = ({animatedProps, scrollToPosition}) => {
             'clamp',
           )
         : withTiming(0, {
-            duration: 400,
+            duration: 200,
             easing: Easing.out(Easing.ease),
           });
     return {
@@ -78,11 +78,11 @@ const Header = ({animatedProps, scrollToPosition}) => {
     const iconPosition =
       currentScreen === 'Main'
         ? withTiming(0, {
-            duration: 500,
+            duration: 300,
             easing: Easing.out(Easing.ease),
           })
         : withTiming(48, {
-            duration: 500,
+            duration: 300,
             easing: Easing.out(Easing.ease),
           });
     return {left: iconPosition};
@@ -108,10 +108,11 @@ const Header = ({animatedProps, scrollToPosition}) => {
         activeOpacity={0.8}
         key={item.stringBeforeSearchableValue}
         onPress={() => {
+          scrollToPosition(componentsScrollPositions[item.located]);
           setIsFocusInput(false);
+          setDisableScroll(false);
           setInputValue('');
           Keyboard.dismiss();
-          scrollToPosition(componentsScrollPositions[item.located]);
         }}
         style={[
           styles.searchItem,
@@ -151,12 +152,24 @@ const Header = ({animatedProps, scrollToPosition}) => {
     componentsScrollPositions,
   ]);
 
+  //for full cycle menu icon animation, when you back to main screen
+  useEffect(() => {
+    if (currentScreen === 'Main') {
+      setTimeout(() => {
+        setShowAddIcons(false);
+      }, 300);
+      scrollToPosition(0);
+    } else {
+      setShowAddIcons(true);
+    }
+  }, [currentScreen, scrollToPosition]);
+
   return (
     <Animated.View style={[styles.hiddenContainer, animatedScrollStyle]}>
       <View style={styles.container}>
         <View style={styles.content}>
           <Animated.View style={[styles.section, styles.leftSection]}>
-            {currentScreen !== 'Main' && (
+            {showAddIcons && (
               <Animated.View style={animatedFadeIcon}>
                 <TouchableOpacity>
                   <MenuIcon />
@@ -188,19 +201,22 @@ const Header = ({animatedProps, scrollToPosition}) => {
             onChangeText={setInputValue}
             onFocus={() => {
               setIsFocusInput(true);
+              setDisableScroll(true);
             }}
             style={[styles.input, isFocusInput && styles.activeInput]}
             placeholder="Поиск мест и событий"
             onBlur={() => {
               Keyboard.dismiss();
               setIsFocusInput(false);
+              setDisableScroll(false);
             }}
           />
+          <SearchIcon style={styles.searchIcon} />
           {inputValue.length > 1 && isFocusInput && searchVariants.length >= 1 && (
             <View style={styles.listContainer}>
               <FlatList
-                scrollEnabled={Platform.OS === 'ios' ? true : false}
-                style={styles.searchList}
+                contentContainerStyle={styles.searchFlatList}
+                style={styles.searchFlatList}
                 data={searchVariants}
                 extraData={searchVariants}
                 keyExtractor={(item, index) =>
@@ -210,7 +226,6 @@ const Header = ({animatedProps, scrollToPosition}) => {
               />
             </View>
           )}
-          <SearchIcon style={styles.searchIcon} />
         </Animated.View>
       </View>
       <View style={styles.hiddenSafeAreaView} />

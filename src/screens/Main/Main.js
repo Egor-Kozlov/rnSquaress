@@ -12,7 +12,7 @@ import {useDispatch} from 'react-redux';
 import {changeScreen} from '../../store/slices/currentScreen';
 import {useRoute, useFocusEffect} from '@react-navigation/native';
 
-const Main = ({navigation, scrollHandler, scrollRef}) => {
+const Main = ({navigation, scrollHandler, scrollRef, disableScroll}) => {
   const dispatch = useDispatch();
 
   //set current screen to store
@@ -28,6 +28,7 @@ const Main = ({navigation, scrollHandler, scrollRef}) => {
   return (
     <View style={styles.mainContainer}>
       <Animated.ScrollView
+        scrollEnabled={!disableScroll}
         style={styles.scroll}
         onScroll={scrollHandler}
         ref={scrollRef}

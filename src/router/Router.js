@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, SafeAreaView, Platform} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -14,6 +14,7 @@ const Stack = createNativeStackNavigator();
 export default function Navigate() {
   const {scrollRef, animatedProps, scrollHandler, scrollToPosition} =
     useHeaderScroll();
+  const [disableScroll, setDisableScroll] = useState(false);
 
   return (
     <NavigationContainer style={styles.container}>
@@ -21,6 +22,7 @@ export default function Navigate() {
       <Header
         animatedProps={animatedProps}
         scrollToPosition={scrollToPosition}
+        setDisableScroll={setDisableScroll}
       />
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name={SCREEN_LIST.Main}>
@@ -29,6 +31,7 @@ export default function Navigate() {
               scrollRef={scrollRef}
               scrollHandler={scrollHandler}
               navigation={navigation}
+              disableScroll={disableScroll}
             />
           )}
         </Stack.Screen>

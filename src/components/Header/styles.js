@@ -38,17 +38,13 @@ export default StyleSheet.create({
   section: {
     width: 70,
     height: 25,
-    // borderWidth: 1,
-    // borderColor: 'green',
     flexDirection: 'row',
-    // justifyContent: 'flex-end',
     alignItems: 'center',
   },
   leftSection: {},
   rightSection: {},
   locationIcon: {
     position: 'absolute',
-    // left: 40,
   },
   personIcon: {
     position: 'absolute',
@@ -85,15 +81,12 @@ export default StyleSheet.create({
     position: 'absolute',
     top: -70,
   },
-  searchList: {
-    height: '100%',
-    borderRadius: 20,
-  },
   listContainer: {
+    overflow: 'hidden',
     position: 'absolute',
     top: 45,
     left: 20,
-    height: 500,
+    height: 350,
     shadowColor: '#000000',
     shadowOffset: {
       width: 0,
@@ -102,6 +95,9 @@ export default StyleSheet.create({
     shadowOpacity: 0.14,
     shadowRadius: 6.59,
     elevation: 5,
+    borderRadius: 20,
+  },
+  searchFlatList: {
     borderRadius: 20,
   },
   searchItem: {
@@ -135,7 +131,7 @@ export default StyleSheet.create({
     borderTopRightRadius: 20,
   },
   lastItem: {
-    borderBottomRightRadius: 20,
-    borderBottomLeftRadius: 20,
+    // borderBottomRightRadius: 20,
+    // borderBottomLeftRadius: 20,
   },
 });
