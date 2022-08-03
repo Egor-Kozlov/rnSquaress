@@ -213,7 +213,11 @@ const Header = ({animatedProps, scrollToPosition, setDisableScroll}) => {
           />
           <SearchIcon style={styles.searchIcon} />
           {inputValue.length > 1 && isFocusInput && searchVariants.length >= 1 && (
-            <View style={styles.listContainer}>
+            <View
+              style={[
+                styles.listContainer,
+                Platform.OS === 'android' && {overflow: 'hidden'},
+              ]}>
               <FlatList
                 contentContainerStyle={styles.searchFlatList}
                 style={styles.searchFlatList}

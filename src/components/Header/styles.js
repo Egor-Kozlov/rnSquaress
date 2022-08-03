@@ -82,7 +82,7 @@ export default StyleSheet.create({
     top: -70,
   },
   listContainer: {
-    overflow: 'hidden',
+    backgroundColor: '#fff',
     position: 'absolute',
     top: 45,
     left: 20,
@@ -131,7 +131,7 @@ export default StyleSheet.create({
     borderTopRightRadius: 20,
   },
   lastItem: {
-    // borderBottomRightRadius: 20,
-    // borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
   },
 });
