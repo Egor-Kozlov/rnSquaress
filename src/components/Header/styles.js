@@ -82,7 +82,7 @@ export default StyleSheet.create({
     top: -70,
   },
   listContainer: {
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     position: 'absolute',
     top: 45,
     left: 20,

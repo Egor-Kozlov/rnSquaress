@@ -2,11 +2,11 @@ import {View, Text} from 'react-native';
 import React, {useEffect, useCallback} from 'react';
 import Animated from 'react-native-reanimated';
 import styles from './styles';
-import Popular from '../../components/Popular/Popular';
-import News from '../../components/News/News';
 import {changeScreen} from '../../store/slices/currentScreen';
 import {useDispatch} from 'react-redux';
 import {useFocusEffect} from '@react-navigation/native';
+import ServiceCart from '../../components/ServiceCart/ServiceCart';
+import ServicesList from '../../components/ServicesList/ServicesList';
 
 const Health = ({navigation, scrollHandler, scrollRef}) => {
   const dispatch = useDispatch();
@@ -28,8 +28,8 @@ const Health = ({navigation, scrollHandler, scrollRef}) => {
         onScroll={scrollHandler}
         ref={scrollRef}
         scrollEventThrottle={16}>
-        {/* <Popular />
-        <News /> */}
+        <ServicesList />
+        <ServiceCart />
       </Animated.ScrollView>
     </View>
   );
