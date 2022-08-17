@@ -4,6 +4,7 @@ export default StyleSheet.create({
   cart: {
     paddingHorizontal: 15,
     paddingVertical: 25,
+    marginTop: 25,
     backgroundColor: '#fff',
     borderRadius: 30,
   },
@@ -78,5 +79,45 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#5F73F1',
+  },
+  picturesContainer: {
+    marginTop: 30,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  description: {
+    marginTop: 20,
+    fontFamily: 'Montserrat-Regular',
+    color: '#747474',
+    lineHeight: 18,
+    fontSize: 13,
+  },
+  actionList: {
+    paddingVertical: 20,
+  },
+  action: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#D9DADA',
+    padding: 3,
+    marginRight: 15,
+    borderRadius: 20,
+  },
+  circle: {
+    width: 18,
+    height: 18,
+    backgroundColor: '#5F73F1',
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  actionText: {
+    fontFamily: 'Montserrat-Regular',
+    color: '#747474',
+    fontSize: 13,
+    marginLeft: 10,
+    marginRight: 8,
   },
 });

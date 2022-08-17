@@ -1,10 +1,13 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import LocationIcon from '../../../assets/icons/serviceCard/locationSmall-icon';
 import ClockIcon from '../../../assets/icons/serviceCard/clock-icon';
 import BookmarkIcon from '../../../assets/icons/serviceCard/bookmark-icon';
 import MobileIcon from '../../../assets/icons/serviceCard/mobile-icon';
+import QuestionIcon from '../../../assets/icons/serviceCard/question-icon';
+import SubmitIcon from '../../../assets/icons/serviceCard/submit-icon';
+import StarIcon from '../../../assets/icons/serviceCard/star-icon';
 
 const ServiceCart = () => {
   return (
@@ -25,6 +28,38 @@ const ServiceCart = () => {
           </View>
         </View>
       </View>
+      <View style={styles.picturesContainer}>
+        <Image source={require('../../../assets/pictures/servicePhoto1.png')} />
+        <Image source={require('../../../assets/pictures/servicePhoto2.png')} />
+        <Image source={require('../../../assets/pictures/servicePhoto3.png')} />
+      </View>
+      <Text style={styles.description}>
+        Студия красоты с уникальным симбиозом безупречного сервиса и высоких
+        стандартов качества предоставляемых услуг
+      </Text>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.actionList}>
+        <TouchableOpacity style={styles.action}>
+          <View style={styles.circle}>
+            <QuestionIcon />
+          </View>
+          <Text style={styles.actionText}>Задать вопрос</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.action}>
+          <View style={styles.circle}>
+            <SubmitIcon />
+          </View>
+          <Text style={styles.actionText}>Записаться</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.action}>
+          <View style={styles.circle}>
+            <StarIcon />
+          </View>
+          <Text style={styles.actionText}>Услуги</Text>
+        </TouchableOpacity>
+      </ScrollView>
       <View style={styles.favoriteContainer}>
         <TouchableOpacity style={styles.favorite}>
           <BookmarkIcon />
