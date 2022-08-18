@@ -9,6 +9,8 @@ import ServiceCart from '../../components/ServiceCart/ServiceCart';
 import ServicesList from '../../components/ServicesList/ServicesList';
 import BackNavButton from '../../components/BackNavButton/BackNavButton';
 import HorizontalCheckbox from '../../components/HorizontalCheckbox/HorizontalCheckbox';
+import ServiceTitle from '../../components/ServiceTitle/ServiceTitle';
+import DiscountList from '../../components/DiscountList/DiscountList';
 
 const Health = ({navigation, scrollHandler, scrollRef}) => {
   const dispatch = useDispatch();
@@ -30,8 +32,11 @@ const Health = ({navigation, scrollHandler, scrollRef}) => {
         onScroll={scrollHandler}
         ref={scrollRef}
         scrollEventThrottle={16}>
-        <BackNavButton />
-        <View style={styles.HorizontalCheckboxContainer}>
+        <BackNavButton navigation={navigation} />
+        <View style={styles.categoryTitleContainer}>
+          <ServiceTitle title="SPA в Минск" count={192} />
+        </View>
+        <View style={styles.horizontalCheckboxContainer}>
           <HorizontalCheckbox
             firstPosition="Все места"
             secondPosition="С онлайн-записью"
@@ -39,7 +44,8 @@ const Health = ({navigation, scrollHandler, scrollRef}) => {
             secondaryColor="#FFFFFF"
           />
         </View>
-        <ServicesList />
+        <ServicesList shadow />
+        <DiscountList />
         <ServiceCart />
         <ServiceCart />
       </Animated.ScrollView>

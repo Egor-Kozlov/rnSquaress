@@ -9,11 +9,21 @@ export default StyleSheet.create({
   scroll: {
     flex: 1,
     zIndex: 5,
-    paddingTop: 20,
+    // paddingTop: 20,
+    paddingTop: 70,
   },
-  HorizontalCheckboxContainer: {
+  horizontalCheckboxContainer: {
     backgroundColor: '#fff',
     paddingBottom: 20,
     paddingHorizontal: 20,
+  },
+  categoryTitleContainer: {
+    backgroundColor: '#fff',
+    paddingHorizontal: 20,
+    paddingBottom: 25,
+  },
+  discountList: {
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
   },
 });

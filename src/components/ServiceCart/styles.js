@@ -7,6 +7,15 @@ export default StyleSheet.create({
     marginTop: 25,
     backgroundColor: '#fff',
     borderRadius: 30,
+    shadowColor: '#5F73F1',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 7.68,
+
+    elevation: 4,
   },
   serviceType: {
     fontSize: 12,

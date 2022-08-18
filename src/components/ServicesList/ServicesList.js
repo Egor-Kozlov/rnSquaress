@@ -6,9 +6,20 @@ import Item from './Item/Item';
 import MoreIcon from '../../../assets/icons/servicesIcons/more-icon.svg';
 import SCREEN_LIST from '../../router/screen-list';
 
-const ServicesList = ({navigation}) => {
+const ServicesList = ({navigation, shadow}) => {
   console.log('navigation: ', navigation);
   const [visibleService, setVisibleService] = useState([]);
+
+  const shadowStyle = {
+    shadowColor: '#5F73F1',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 7.68,
+    elevation: 4,
+  };
 
   const showFirstFiveServices = () => {
     setVisibleService(entertainments.slice(0, 5));
@@ -23,7 +34,7 @@ const ServicesList = ({navigation}) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, shadow ? shadowStyle : null]}>
       <View style={styles.servicesList}>
         {visibleService.map((item, index) => (
           <Item
