@@ -12,7 +12,12 @@ import discount from './content/content';
 
 const DiscountList = () => {
   const renderCard = ({item}) => (
-    <Card title={item.title} date={item.date} price={item.price} />
+    <Card
+      title={item.title}
+      date={item.date}
+      price={item.price}
+      image={item.picture}
+    />
   );
 
   return (
