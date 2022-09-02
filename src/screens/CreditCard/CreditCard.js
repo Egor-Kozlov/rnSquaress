@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
 import Card from './Card/Card';
+import data from './data';
 
 const CreditCards = () => {
   return (
@@ -8,7 +9,16 @@ const CreditCards = () => {
       <ScrollView style={styles.scroll}>
         <Text>CreditCard</Text>
         <View style={styles.list}>
-          <Card />
+          {data.map(card => (
+            <Card
+              date={card.date}
+              cardNumber={card.cardNumber}
+              bankIcon={card.bankIcon}
+              chipIcon={card.chipIcon}
+              person={card.person}
+              background={card.background}
+            />
+          ))}
         </View>
       </ScrollView>
     </View>

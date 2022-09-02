@@ -1,26 +1,29 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import CardBackground from '../../../../assets/pictures/creditCard/cardBackground-1.svg';
-import ChipIcon from '../../../../assets/icons/creditCard/chip.svg';
-import BankIcon from '../../../../assets/icons/creditCard/visa.svg';
 
-const Card = () => {
+const Card = ({date, cardNumber, bankIcon, chipIcon, person, background}) => {
   return (
     <TouchableOpacity activeOpacity={0.8} style={styles.card}>
-      <CardBackground style={styles.background} />
+      {/* {background} */}
+      <View style={styles.background}>{background}</View>
       <View style={styles.topContainer}>
-        <ChipIcon />
-        <BankIcon />
+        {chipIcon}
+        {bankIcon}
       </View>
-      <Text style={styles.cardNumber}>**** **** **** 2345</Text>
+      <Text style={styles.cardNumber}>{cardNumber}</Text>
       <View style={styles.information}>
         <View style={styles.holderNameContainer}>
           <Text style={styles.holderName}>Card Holder name</Text>
-          <Text style={styles.personName}>Noman Manzoor</Text>
+          <Text style={styles.personName}>
+            {person.name} {person.surname}
+          </Text>
         </View>
         <View style={styles.dateContainer}>
           <Text style={styles.holderName}>Expiry Date</Text>
-          <Text style={styles.personName}>02/30</Text>
+          <Text style={styles.personName}>
+            {date.month}/{date.year}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -38,6 +41,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray',
     paddingHorizontal: 20,
     paddingVertical: 28,
+    marginVertical: 10,
 
     shadowColor: '#000',
     shadowOffset: {
