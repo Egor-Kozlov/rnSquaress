@@ -7,7 +7,6 @@ import MoreIcon from '../../../assets/icons/servicesIcons/more-icon.svg';
 import SCREEN_LIST from '../../router/screen-list';
 
 const ServicesList = ({navigation, shadow}) => {
-  console.log('navigation: ', navigation);
   const [visibleService, setVisibleService] = useState([]);
 
   const shadowStyle = {
@@ -44,6 +43,10 @@ const ServicesList = ({navigation, shadow}) => {
             onPressFunc={
               item.title === 'Здоровье'
                 ? () => navigation.navigate(SCREEN_LIST.Health)
+                : item.title === 'Шопинг'
+                ? () => navigation.navigate(SCREEN_LIST.Shopping)
+                : item.title === 'Еда'
+                ? () => navigation.navigate(SCREEN_LIST.Food)
                 : showFirstFiveServices
             }
             border={index === visibleService.length - 2 ? 'left' : null}

@@ -3,14 +3,15 @@ import {StyleSheet, View, StatusBar} from 'react-native';
 import {Provider} from 'react-redux';
 import store from './src/store/store';
 import Router from './src/router/Router';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 const App = () => {
   return (
     <Provider store={store}>
       <StatusBar barStyle="dark-content" backgroundColor={'#fff'} />
-      <View style={styles.container}>
+      <GestureHandlerRootView style={styles.container}>
         <Router />
-      </View>
+      </GestureHandlerRootView>
     </Provider>
   );
 };

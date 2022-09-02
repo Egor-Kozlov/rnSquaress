@@ -6,8 +6,10 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SCREEN_LIST from './screen-list';
 import Health from '../screens/Health/Health';
 import Main from '../screens/Main/Main';
+import Shopping from '../screens/Shopping/Shopping';
 import Header from '../components/Header/Header';
 import useHeaderScroll from '../hooks/useHeaderScroll';
+import CreditCard from '../screens/CreditCard/CreditCard';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +40,24 @@ export default function Navigate() {
         <Stack.Screen name={SCREEN_LIST.Health}>
           {({navigation}) => (
             <Health
+              scrollRef={scrollRef}
+              scrollHandler={scrollHandler}
+              navigation={navigation}
+            />
+          )}
+        </Stack.Screen>
+        <Stack.Screen name={SCREEN_LIST.Shopping}>
+          {({navigation}) => (
+            <Shopping
+              scrollRef={scrollRef}
+              scrollHandler={scrollHandler}
+              navigation={navigation}
+            />
+          )}
+        </Stack.Screen>
+        <Stack.Screen name={SCREEN_LIST.Food}>
+          {({navigation}) => (
+            <CreditCard
               scrollRef={scrollRef}
               scrollHandler={scrollHandler}
               navigation={navigation}
