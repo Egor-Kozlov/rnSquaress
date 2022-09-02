@@ -7,7 +7,9 @@ const CreditCards = () => {
     <View style={styles.mainContainer}>
       <ScrollView style={styles.scroll}>
         <Text>CreditCard</Text>
-        <Card />
+        <View style={styles.list}>
+          <Card />
+        </View>
       </ScrollView>
     </View>
   );
@@ -23,5 +25,9 @@ const styles = StyleSheet.create({
   },
   scroll: {
     paddingTop: 50,
+  },
+  list: {
+    width: '100%',
+    padding: 30,
   },
 });

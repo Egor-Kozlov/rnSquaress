@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import CardBackground from '../../../../assets/pictures/creditCard/cardBackground-1.svg';
 import ChipIcon from '../../../../assets/icons/creditCard/chip.svg';
@@ -6,7 +6,7 @@ import BankIcon from '../../../../assets/icons/creditCard/visa.svg';
 
 const Card = () => {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity activeOpacity={0.8} style={styles.card}>
       <CardBackground style={styles.background} />
       <View style={styles.topContainer}>
         <ChipIcon />
@@ -23,7 +23,7 @@ const Card = () => {
           <Text style={styles.personName}>02/30</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -31,13 +31,23 @@ export default Card;
 
 const styles = StyleSheet.create({
   card: {
-    width: 300,
+    width: 299,
     height: 198,
     justifyContent: 'space-between',
-    borderRadius: 10,
+    borderRadius: 15,
     backgroundColor: 'gray',
     paddingHorizontal: 20,
     paddingVertical: 28,
+
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 6.65,
+
+    elevation: 7,
   },
   background: {
     position: 'absolute',
