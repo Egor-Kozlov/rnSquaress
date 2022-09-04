@@ -1,11 +1,20 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
-import CardBackground from '../../../../assets/pictures/creditCard/cardBackground-1.svg';
 
-const Card = ({date, cardNumber, bankIcon, chipIcon, person, background}) => {
+const Card = ({
+  date,
+  cardNumber,
+  bankIcon,
+  chipIcon,
+  person,
+  background,
+  setIsShowCards,
+}) => {
   return (
-    <TouchableOpacity activeOpacity={0.8} style={styles.card}>
-      {/* {background} */}
+    <TouchableOpacity
+      activeOpacity={0.8}
+      style={styles.card}
+      onPress={() => setIsShowCards(true)}>
       <View style={styles.background}>{background}</View>
       <View style={styles.topContainer}>
         {chipIcon}
@@ -30,7 +39,7 @@ const Card = ({date, cardNumber, bankIcon, chipIcon, person, background}) => {
   );
 };
 
-export default Card;
+export default React.memo(Card);
 
 const styles = StyleSheet.create({
   card: {
@@ -42,7 +51,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 28,
     marginVertical: 10,
-
+    // transform: [{rotate: '10deg'}],
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
