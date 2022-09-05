@@ -9,12 +9,14 @@ const Card = ({
   person,
   background,
   setIsShowCards,
+  isShowCards,
 }) => {
   return (
-    <TouchableOpacity
-      activeOpacity={0.8}
+    <View
+      // activeOpacity={isShowCards ? 0.9 : 1}
       style={styles.card}
-      onPress={() => setIsShowCards(true)}>
+      // onPress={() => setIsShowCards(true)}
+    >
       <View style={styles.background}>{background}</View>
       <View style={styles.topContainer}>
         {chipIcon}
@@ -35,7 +37,7 @@ const Card = ({
           </Text>
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 

@@ -25,6 +25,7 @@ const cardsStyle = [
       month: '02',
     },
     background: <Background1 />,
+    id: '1',
   },
   {
     bank: 'mastercard',
@@ -41,6 +42,7 @@ const cardsStyle = [
       month: '11',
     },
     background: <Background4 />,
+    id: '2',
   },
   {
     bank: 'mastercard',
@@ -57,23 +59,25 @@ const cardsStyle = [
       month: '11',
     },
     background: <Background5 />,
+    id: '3',
   },
-  // {
-  //   bank: 'mastercard',
-  //   bankIcon: <Visa />,
-  //   chip: 'transparent',
-  //   chipIcon: <Chip />,
-  //   cardNumber: '**** **** **** 2322',
-  //   person: {
-  //     name: 'Noman',
-  //     surname: 'Manzoor',
-  //   },
-  //   date: {
-  //     year: '28',
-  //     month: '11',
-  //   },
-  //   background: <Background2 />,
-  // },
+  {
+    bank: 'mastercard',
+    bankIcon: <Visa />,
+    chip: 'transparent',
+    chipIcon: <Chip />,
+    cardNumber: '**** **** **** 2322',
+    person: {
+      name: 'Olga',
+      surname: 'Manzoor',
+    },
+    date: {
+      year: '28',
+      month: '11',
+    },
+    background: <Background2 />,
+    id: '4',
+  },
 ];
 
 export default cardsStyle;
