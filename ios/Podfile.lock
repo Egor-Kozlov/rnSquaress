@@ -638,7 +638,11 @@ SPEC CHECKSUMS:
   ReactCommon: de55f940495d7bf87b5d7bf55b5b15cdd50d7d7b
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNGestureHandler: 920eb17f5b1e15dae6e5ed1904045f8f90e0b11e
+<<<<<<< HEAD
   RNReanimated: 60e291d42c77752a0f6d6f358387bdf225a87c6e
+=======
+  RNReanimated: 2cf7451318bb9cc430abeec8d67693f9cf4e039c
+>>>>>>> dev
   RNScreens: 4a1af06327774490d97342c00aee0c2bafb497b7
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
