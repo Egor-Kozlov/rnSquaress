@@ -183,7 +183,7 @@ const Header = ({animatedProps, scrollToPosition, setDisableScroll}) => {
               </TouchableOpacity>
             </Animated.View>
           </Animated.View>
-          <Text style={styles.title}>Логотип</Text>
+          <Text style={styles.title}>Логотип1</Text>
           <View style={[styles.section, styles.rightSection]}>
             <Animated.View style={animatedFadeIcon}>
               <TouchableOpacity>
